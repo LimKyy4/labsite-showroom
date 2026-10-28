@@ -1,0 +1,58 @@
+import { InspectionBreakdown } from '../types/showroom';
+
+export const INSPECTION_DATA: Record<string, InspectionBreakdown> = {
+  fortuner: {
+    engineScore: '98/100 (Kompresi Padat, Kering Tanpa Rembes Oli)',
+    transmissionScore: '96/100 (Perpindahan Halus, Torsi Responsif)',
+    chassisScore: '100/100 (Pilar A-B-C Utuh Pabrik, Bebas Benturan)',
+    electricalScore: '97/100 (ECU, Sensor TSS, & Kelistrikan Normal)',
+    interiorScore: '95/100 (Jok Kulit Segar, Karpet Kering Bebas Banjir)',
+    floodFreeConfirmed: true,
+    accidentFreeConfirmed: true,
+  },
+  innova: {
+    engineScore: '97/100 (Tarikan Bertenaga, Emisi Gas Buang Lolos)',
+    transmissionScore: '98/100 (6-Speed Tiptronic Responsif)',
+    chassisScore: '100/100 (Sasis Ladder Frame Simetris Sempurna)',
+    electricalScore: '96/100 (Semua Fitur Kabin & AC Digital Dingin)',
+    interiorScore: '96/100 (Kabin Wangi Tanpa Asap Rokok / Lumpur)',
+    floodFreeConfirmed: true,
+    accidentFreeConfirmed: true,
+  },
+  crv: {
+    engineScore: '95/100 (Boost Turbo Sehat, Oli Mesin Bening)',
+    transmissionScore: '95/100 (CVT Earth Dreams Halus Tanpa Sentakan)',
+    chassisScore: '99/100 (Bodi Monokok Presisi, Bebas Las Reparasi)',
+    electricalScore: '98/100 (Power Tailgate & Sunroof Berfungsi Normal)',
+    interiorScore: '94/100 (Jok Kulit Hitam Terawat Rapi)',
+    floodFreeConfirmed: true,
+    accidentFreeConfirmed: true,
+  },
+  raize: {
+    engineScore: '99/100 (Mesin Sangat Segar Seperti Baru)',
+    transmissionScore: '99/100 (D-CVT Mulus & Irit Konsumsi BBM)',
+    chassisScore: '100/100 (Sasis DNGA Bebas Insiden Tabrak)',
+    electricalScore: '100/100 (Radar TSS Aktif & Lane Departure Lancar)',
+    interiorScore: '98/100 (Aroma Mobil Baru Masih Terasa)',
+    floodFreeConfirmed: true,
+    accidentFreeConfirmed: true,
+  },
+  civic: {
+    engineScore: '100/100 (Performa Optimal 178 PS Maksimal)',
+    transmissionScore: '99/100 (Paddle Shift Presisi & Sporty)',
+    chassisScore: '100/100 (Geometri Sasis Lolos Uji Laser Komputer)',
+    electricalScore: '100/100 (Honda Sensing & BOSE Audio Utuh)',
+    interiorScore: '99/100 (Kabin Suede & Kulit Merah Pristine)',
+    floodFreeConfirmed: true,
+    accidentFreeConfirmed: true,
+  },
+  pajero: {
+    engineScore: '98/100 (Mesin MIVEC Tangguh di Tanjakan Bogor)',
+    transmissionScore: '97/100 (8-Speed AT Halus & Bertenaga)',
+    chassisScore: '99/100 (Kolong Sasis Cat Asli Bebas Korosi)',
+    electricalScore: '97/100 (Kamera 360 & Sunroof Berfungsi Baik)',
+    interiorScore: '95/100 (Kabin Luas 7-Seater Terawat Apik)',
+    floodFreeConfirmed: true,
+    accidentFreeConfirmed: true,
+  },
+};
