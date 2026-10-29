@@ -18,7 +18,7 @@ export const ToastNotification: React.FC = () => {
   return (
     <div
       aria-live="polite"
-      className="fixed bottom-6 right-6 z-50 flex flex-col gap-2.5 max-w-sm w-full pointer-events-none px-4 sm:px-0"
+      className="fixed bottom-24 sm:bottom-8 right-4 sm:right-6 z-50 flex flex-col gap-2.5 max-w-sm w-full pointer-events-none px-4 sm:px-0"
     >
       {toasts.map((toast) => {
         const icon =

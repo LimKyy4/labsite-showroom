@@ -17,6 +17,7 @@ interface ShowroomState {
   setActiveTab: (tab: ActiveTab) => void;
   setCarStatus: (id: string, status: CarStatus) => void;
   resetInventory: () => void;
+  resetToInitialData: () => void;
   addToast: (title: string, description: string, type?: ToastMessage['type']) => void;
   removeToast: (id: string) => void;
   setBookingModalOpen: (open: boolean, carTitle?: string) => void;
@@ -48,6 +49,7 @@ export const useShowroomStore = create<ShowroomState>()(
           cars: state.cars.map((c) => (c.id === id ? { ...c, status } : c)),
         })),
       resetInventory: () => set(() => ({ cars: INITIAL_CARS })),
+      resetToInitialData: () => set(() => ({ cars: INITIAL_CARS })),
       addToast: (title, description, type = 'success') =>
         set((state) => {
           const id = `toast-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`;

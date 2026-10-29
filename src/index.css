@@ -32,9 +32,32 @@
 }
 
 @layer utilities {
-  .font-heading { font-family: 'Outfit', sans-serif; }
-  .font-body { font-family: 'Plus Jakarta Sans', sans-serif; }
-  .font-mono { font-family: 'JetBrains Mono', monospace; }
-  .no-scrollbar::-webkit-scrollbar { display: none; }
-  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .font-heading {
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+  }
+  .font-display {
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+  }
+  .font-body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    line-height: 1.6;
+  }
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .ticker-gpu {
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+  }
 }

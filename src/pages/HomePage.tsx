@@ -1,25 +1,21 @@
 import React from 'react';
-import { HeroCarousel } from '../components/home/HeroCarousel';
-import { FloatingQuickSearch } from '../components/home/FloatingQuickSearch';
+import { HeroStage } from '../components/home/HeroStage';
 import { RunningTicker } from '../components/common/RunningTicker';
-import { ValueProposition } from '../components/home/ValueProposition';
-import { HowItWorksTimeline } from '../components/home/HowItWorksTimeline';
-import { FeaturedCarsPreview } from '../components/home/FeaturedCarsPreview';
+import { ValueBentoGrid } from '../components/home/ValueBentoGrid';
+import { StepScrubber } from '../components/home/StepScrubber';
+import { FeaturedCarsSection } from '../components/home/FeaturedCarsSection';
+import { QuickFAQAccordion } from '../components/home/QuickFAQAccordion';
 import { QuickPeekModal } from '../components/home/QuickPeekModal';
-import { QuickFAQ } from '../components/home/QuickFAQ';
 
 export const HomePage: React.FC = () => {
   return (
     <div className="space-y-0">
-      <HeroCarousel />
-      <FloatingQuickSearch />
-      <div className="pt-10">
-        <RunningTicker />
-      </div>
-      <ValueProposition />
-      <HowItWorksTimeline />
-      <FeaturedCarsPreview />
-      <QuickFAQ />
+      <HeroStage />
+      <RunningTicker />
+      <ValueBentoGrid />
+      <StepScrubber />
+      <FeaturedCarsSection />
+      <QuickFAQAccordion />
       <QuickPeekModal />
     </div>
   );

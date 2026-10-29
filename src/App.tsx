@@ -1,10 +1,11 @@
 import React from 'react';
 import { useShowroomStore } from './store/useShowroomStore';
-import { Navbar } from './components/common/Navbar';
+import { NavbarPill } from './components/common/NavbarPill';
 import { Footer } from './components/common/Footer';
 import { ToastNotification } from './components/common/ToastNotification';
 import { MobileBottomDock } from './components/common/MobileBottomDock';
 import { TestDriveBookingModal } from './components/contact/TestDriveBookingModal';
+import { DevCacheResetButton } from './components/common/DevCacheResetButton';
 import { HomePage } from './pages/HomePage';
 import { InventoryPage } from './pages/InventoryPage';
 import { CarDetailPage } from './pages/CarDetailPage';
@@ -32,8 +33,8 @@ export const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-canvas text-charcoal font-body antialiased pb-16 md:pb-0">
-      {/* Sticky Top App Bar */}
-      <Navbar />
+      {/* Floating Pill Fixed Top App Bar */}
+      <NavbarPill />
 
       {/* Main Content Area with Viewport Offset Padding */}
       <main className="flex-1 pt-20 sm:pt-24">
@@ -46,9 +47,10 @@ export const App: React.FC = () => {
       {/* Mobile Floating Action Dock (Thumb Zone) */}
       <MobileBottomDock />
 
-      {/* Global Modals & Floating Toasts */}
+      {/* Global Modals, Floating Toasts & Dev Utility Dock */}
       <TestDriveBookingModal />
       <ToastNotification />
+      <DevCacheResetButton />
     </div>
   );
 };
