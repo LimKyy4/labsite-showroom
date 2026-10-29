@@ -38,18 +38,21 @@ export const TechnicalSpecsBento: React.FC<TechnicalSpecsBentoProps> = ({ specs 
 
   return (
     <div className="border border-hairline bg-white p-6 sm:p-7 space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-hairline gap-2">
-        <div>
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between pb-4 border-b border-hairline gap-3">
+        <div className="space-y-1 min-w-0">
           <span className="font-mono text-xs uppercase tracking-wider text-forest font-bold block">
             MODUL TEKNIS ARSITEKTURAL
           </span>
-          <h3 className="font-heading text-lg sm:text-xl font-bold text-charcoal">
+          <h3 className="font-heading text-lg sm:text-xl font-bold text-charcoal leading-tight">
             Spesifikasi Lengkap & Kondisi Komponen Aktual
           </h3>
         </div>
-        <span className="font-mono text-xs text-forest bg-sage-light px-2.5 py-1 border border-sage-border font-bold self-start sm:self-auto">
-          Terverifikasi Bengkel Resmi
-        </span>
+        <div className="shrink-0 self-start sm:self-end">
+          <span className="inline-flex items-center gap-1.5 font-mono text-xs text-forest bg-sage-light px-2.5 py-1 border border-sage-border font-semibold whitespace-nowrap">
+            <CheckCircle2 className="h-3.5 w-3.5 text-forest" />
+            <span>Terverifikasi Bengkel Resmi</span>
+          </span>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 font-mono text-xs">

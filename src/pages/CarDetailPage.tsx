@@ -85,23 +85,23 @@ export const CarDetailPage: React.FC = () => {
           </p>
         </div>
 
-        {/* Quick Specs Grid: Responsif 2 Kolom Mobile, 4 Kolom Proporsional Desktop */}
-        <QuickSpecsGrid car={car} />
-
-        {/* Dual-Pane Sticky Layout (Desktop) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          {/* Left Column: Visuals, Deep Technical Specs & Document Legality */}
+        {/* Dual-Pane Asymmetric Sticky Layout (Desktop) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+          {/* Left Column: Visuals, Quick Specs, Deep Specs, Legality & Inspection */}
           <div className="lg:col-span-7 space-y-6">
             <DetailGalleryCarousel images={safeImages} title={car.title} status={car.status || 'Tersedia'} />
+            <QuickSpecsGrid car={car} />
             <TechnicalSpecsBento specs={car.technicalSpecs} />
             <DocumentLegalityPanel car={car} legality={car.legalitySheet} />
             <InspectionReportAccordion breakdown={safeBreakdown} />
           </div>
 
-          {/* Right Column (Sticky Panel): Conversion & Financials */}
-          <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-6">
-            <StickyDetailCTA car={car} />
-            <CreditSimulator carPrice={safePrice} />
+          {/* Right Column (Scroll-Locked Sticky Console): Conversion & Financials */}
+          <div className="lg:col-span-5 relative">
+            <aside className="lg:sticky lg:top-24 space-y-6">
+              <StickyDetailCTA car={car} />
+              <CreditSimulator carPrice={safePrice} />
+            </aside>
           </div>
         </div>
       </div>

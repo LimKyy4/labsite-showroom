@@ -20,7 +20,7 @@ export const VisitFAQ: React.FC = () => {
   }));
 
   return (
-    <section aria-label="Panduan Kunjungan Showroom" className="bg-canvas py-16 lg:py-20">
+    <section aria-label="Panduan Kunjungan Showroom" className="bg-canvas pt-16 sm:pt-20 lg:pt-24 pb-24 sm:pb-28">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-8">
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <div className="inline-flex items-center gap-2 border border-hairline bg-alabaster px-3 py-1">

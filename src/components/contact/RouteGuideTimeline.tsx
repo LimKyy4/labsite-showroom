@@ -18,7 +18,7 @@ export const RouteGuideTimeline: React.FC = () => {
   };
 
   return (
-    <section aria-label="Panduan Rute Jalan Menuju Showroom" className="bg-canvas border-b border-hairline py-16 lg:py-20">
+    <section aria-label="Panduan Rute Jalan Menuju Showroom" className="bg-canvas border-b border-hairline pt-16 lg:pt-20 pb-24 sm:pb-28 lg:pb-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div className="max-w-2xl space-y-2">
@@ -57,31 +57,37 @@ export const RouteGuideTimeline: React.FC = () => {
                 key={st.num}
                 type="button"
                 onClick={() => setActiveStep(idx)}
-                className={`relative text-left p-5 border transition-colors ${
+                className={`relative text-left p-5 border transition-all duration-150 ${
                   isActive
-                    ? 'border-forest text-white'
-                    : 'border-hairline bg-white hover:border-muted text-charcoal'
+                    ? 'border-forest bg-forest text-white shadow-sm'
+                    : 'border-hairline bg-white hover:border-muted text-charcoal hover:bg-alabaster'
                 }`}
               >
-                {isActive && (
-                  <motion.div
-                    layoutId="activeRoutePill"
-                    className="absolute inset-0 bg-forest -z-10"
-                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-                  />
-                )}
-                <div className="flex items-center justify-between pb-3 border-b border-hairline/25">
-                  <span className={`font-mono text-xs font-bold ${isActive ? 'text-sage-light' : 'text-forest'}`}>
+                <div className={`flex items-center justify-between pb-3 border-b ${
+                  isActive ? 'border-white/20' : 'border-hairline'
+                }`}>
+                  <span className={`font-mono text-xs font-bold tracking-wider ${
+                    isActive ? 'text-sage-light' : 'text-forest'
+                  }`}>
                     LANGKAH {st.num}
                   </span>
-                  <div className="flex items-center gap-1.5">
-                    <Icon className="h-3.5 w-3.5" />
-                    <span className="font-mono text-[10px]">{st.distance}</span>
+                  <div className={`flex items-center gap-1.5 ${
+                    isActive ? 'text-white' : 'text-muted'
+                  }`}>
+                    <Icon className={`h-3.5 w-3.5 ${isActive ? 'text-sage-light' : 'text-forest'}`} />
+                    <span className="font-mono text-[11px] font-semibold">{st.distance}</span>
                   </div>
                 </div>
-                <h3 className={`font-heading text-sm font-bold mt-3 leading-tight ${isActive ? 'text-white' : 'text-charcoal'}`}>
+                <h3 className={`font-heading text-sm font-bold mt-3 leading-snug ${
+                  isActive ? 'text-white' : 'text-charcoal'
+                }`}>
                   {st.title}
                 </h3>
+                <p className={`font-body text-xs mt-1.5 line-clamp-1 ${
+                  isActive ? 'text-sage-light/85' : 'text-muted'
+                }`}>
+                  {st.landmark}
+                </p>
               </button>
             );
           })}
@@ -97,11 +103,16 @@ export const RouteGuideTimeline: React.FC = () => {
             transition={{ duration: 0.22 }}
             className="border border-hairline bg-alabaster p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm"
           >
-            <div className="space-y-2 max-w-xl">
-              <span className="font-mono text-xs text-forest bg-sage-light px-2.5 py-1 border border-sage-border font-bold">
-                PATOKAN UTAMA: {current.landmark}
-              </span>
-              <h3 className="font-heading text-xl font-bold text-charcoal">
+            <div className="space-y-2.5 max-w-xl">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="font-mono text-xs text-forest bg-sage-light px-2.5 py-1 border border-sage-border font-bold">
+                  PATOKAN UTAMA: {current.landmark}
+                </span>
+                <span className="font-mono text-[11px] text-muted border border-hairline bg-white px-2 py-0.5 font-semibold">
+                  Kumulatif: {current.distance}
+                </span>
+              </div>
+              <h3 className="font-heading text-xl sm:text-2xl font-bold text-charcoal">
                 {current.title}
               </h3>
               <p className="font-body text-sm text-muted leading-relaxed">

@@ -66,19 +66,19 @@ export const QuickSpecsGrid: React.FC<QuickSpecsGridProps> = ({ car }) => {
         </span>
       </div>
 
-      {/* Grid Responsif: 2 Kolom di Layar Sempit, 4 Kolom Proporsional di Layar Lebar */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 pt-1">
+      {/* Grid Responsif: 2 Kolom Mobile, 2 Kolom di Desktop Pane Kiri, 4 Kolom di Layar Lebar */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4 pt-1">
         {specs.map((item, idx) => {
           const Icon = item.icon;
           return (
             <div
               key={idx}
-              className="p-3.5 sm:p-4 bg-alabaster border border-hairline flex flex-col justify-between space-y-2 min-h-[82px]"
+              className="p-3.5 sm:p-4 bg-alabaster border border-hairline flex flex-col justify-between space-y-2 min-h-[86px]"
             >
               {/* Baris Atas: Ikon + Label Mono Tipis */}
               <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] font-mono text-muted tracking-wider uppercase">
                 <Icon className="h-3.5 w-3.5 text-sage shrink-0" />
-                <span className="leading-tight">{item.label}</span>
+                <span className="leading-tight truncate">{item.label}</span>
               </div>
 
               {/* Baris Bawah: Nilai Data Tebal Outfit dengan Pembungkus Teks Alami Tanpa Elipsis */}

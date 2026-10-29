@@ -49,20 +49,20 @@ export const StickyDetailCTA: React.FC<StickyDetailCTAProps> = ({ car }) => {
         </div>
 
         {/* Tombol Unduh Laporan Satu Baris Sejajar dengan Tombol Share */}
-        <div className="flex items-center gap-2 pt-1">
+        <div className="flex items-center gap-2.5 pt-1">
           <button
             type="button"
             onClick={handleDownloadReport}
-            className="flex-1 inline-flex items-center justify-center gap-2 h-10 px-4 text-xs font-mono font-medium text-charcoal bg-white border border-hairline hover:bg-alabaster hover:border-forest transition-colors whitespace-nowrap"
+            className="flex-1 min-w-0 h-11 px-3 sm:px-4 inline-flex items-center justify-center gap-2 text-xs font-mono font-semibold text-charcoal bg-white border border-hairline hover:bg-alabaster hover:border-forest hover:text-forest transition-colors"
             title="Unduh laporan inspeksi lengkap 160 titik"
           >
             <Download className="h-4 w-4 text-forest shrink-0" />
-            <span>Unduh Laporan 160 Titik</span>
+            <span className="truncate">Unduh Laporan 160 Titik</span>
           </button>
           <button
             type="button"
             onClick={handleShare}
-            className="flex h-10 w-10 items-center justify-center bg-white border border-hairline hover:bg-alabaster hover:border-forest text-charcoal transition-colors shrink-0"
+            className="h-11 w-11 flex items-center justify-center bg-white border border-hairline hover:bg-alabaster hover:border-forest text-charcoal hover:text-forest transition-colors shrink-0"
             title="Bagikan unit ini"
             aria-label="Bagikan unit ini"
           >
