@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Shield, Cog, Waves, FileCheck, RefreshCw, Award } from 'lucide-react';
 import { PillarMatrixCard } from './PillarMatrixCard';
 
@@ -70,8 +71,17 @@ export const GuaranteePillarsGrid: React.FC = () => {
 
         {/* 5-Column Responsive Matrix */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
-          {pillars.map((p) => (
-            <PillarMatrixCard key={p.num} {...p} />
+          {pillars.map((p, idx) => (
+            <motion.div
+              key={p.num}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.08 }}
+              className="flex flex-col"
+            >
+              <PillarMatrixCard {...p} />
+            </motion.div>
           ))}
         </div>
       </div>

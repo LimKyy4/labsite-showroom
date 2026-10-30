@@ -9,7 +9,7 @@ import { QuickPeekModal } from '../components/home/QuickPeekModal';
 
 export const HomePage: React.FC = () => {
   return (
-    <div className="space-y-0">
+    <div style={{ position: 'relative' }} className="relative space-y-0 pb-12 sm:pb-16">
       <HeroStage />
       <RunningTicker />
       <ValueBentoGrid />

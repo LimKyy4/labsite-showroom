@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { AdvisorConciergeBadge, AdvisorData } from './AdvisorConciergeBadge';
 import { ShieldCheck } from 'lucide-react';
 
@@ -54,8 +55,17 @@ export const SalesAdvisorCards: React.FC = () => {
 
         {/* 3-Column Executive Concierge Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {EXECUTIVE_ADVISORS.map((advisor) => (
-            <AdvisorConciergeBadge key={advisor.name} advisor={advisor} />
+          {EXECUTIVE_ADVISORS.map((advisor, idx) => (
+            <motion.div
+              key={advisor.name}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.35, delay: idx * 0.1 }}
+              className="flex flex-col"
+            >
+              <AdvisorConciergeBadge advisor={advisor} />
+            </motion.div>
           ))}
         </div>
       </div>

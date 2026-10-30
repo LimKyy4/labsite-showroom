@@ -24,7 +24,7 @@ export const TimeSessionSelector: React.FC<TimeSessionSelectorProps> = ({
 }) => {
   return (
     <div>
-      <label className="font-mono text-[10px] uppercase tracking-wider text-muted block mb-1.5">
+      <label className="font-mono text-[10px] uppercase tracking-wider text-muted block mb-1.5 font-bold">
         Pilihan Sesi Waktu Test Drive *
       </label>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -35,7 +35,7 @@ export const TimeSessionSelector: React.FC<TimeSessionSelectorProps> = ({
               key={sess.id}
               type="button"
               onClick={() => onSelectSession(sess.id)}
-              className={`p-2.5 text-left border transition-all ${
+              className={`p-3 text-left border rounded-lg transition-all select-none active:scale-95 ${
                 isSelected
                   ? 'border-forest bg-forest text-white shadow-sm'
                   : 'border-hairline bg-alabaster text-charcoal hover:border-forest'
@@ -46,8 +46,8 @@ export const TimeSessionSelector: React.FC<TimeSessionSelectorProps> = ({
                 {sess.time}
               </div>
               <div
-                className={`text-[9px] mt-1 italic ${
-                  isSelected ? 'text-emerald-300' : 'text-forest font-semibold'
+                className={`text-[9px] mt-1 font-mono ${
+                  isSelected ? 'text-emerald-300 font-bold' : 'text-forest font-semibold'
                 }`}
               >
                 {sess.highlight}

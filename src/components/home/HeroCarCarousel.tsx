@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Activity, ShieldCheck, Gauge } from 'lucide-react';
 import { HeroTelemetryOverlay } from './HeroTelemetryOverlay';
 import { HeroHotspotPin } from './HeroHotspotPin';
+import { HeroMobileTelemetryRail } from './HeroMobileTelemetryRail';
 import { CarUnit } from '../../types/showroom';
 
 interface HeroCarCarouselProps {
@@ -14,8 +15,8 @@ interface HeroCarCarouselProps {
 
 const STUDIO_ANGLES = [
   { id: 0, label: '01 Depan 3/4' },
-  { id: 1, label: '02 Kokpit Interior' },
-  { id: 2, label: '03 Ruang Mesin' },
+  { id: 1, label: '02 Interior' },
+  { id: 2, label: '03 Mesin' },
 ];
 
 export const HeroCarCarousel: React.FC<HeroCarCarouselProps> = ({
@@ -44,102 +45,71 @@ export const HeroCarCarousel: React.FC<HeroCarCarouselProps> = ({
   }, [isPaused]);
 
   return (
-    <div
-      className="relative w-full aspect-[16/10] sm:aspect-[16/9] border border-hairline bg-alabaster overflow-hidden group select-none shadow-sm"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
-      {/* 3D Isometric Studio Floor Grid Lines */}
-      <svg
-        className="absolute inset-0 w-full h-full opacity-25 pointer-events-none stroke-hairline"
-        viewBox="0 0 800 450"
-        fill="none"
-      >
-        <line x1="0" y1="360" x2="800" y2="360" stroke="#183B2B" strokeWidth="1" strokeDasharray="6 4" opacity="0.3" />
-        <ellipse cx="400" cy="370" rx="360" ry="45" stroke="#183B2B" strokeWidth="1" opacity="0.25" />
-        <ellipse cx="400" cy="370" rx="280" ry="32" stroke="#183B2B" strokeWidth="1" strokeDasharray="4 4" opacity="0.35" />
-        <line x1="400" y1="320" x2="100" y2="450" stroke="#4D7260" strokeWidth="0.8" opacity="0.2" />
-        <line x1="400" y1="320" x2="700" y2="450" stroke="#4D7260" strokeWidth="0.8" opacity="0.2" />
-      </svg>
-
-      <HeroTelemetryOverlay />
-
-      {/* Main Showcase with Zoom & Crossfade */}
+    <div className="space-y-2 select-none">
       <div
-        className="relative w-full h-full cursor-pointer overflow-hidden"
-        onClick={() => onCarClick(activeCar.id)}
+        className="relative w-full aspect-[16/9] border border-hairline bg-alabaster overflow-hidden group shadow-sm"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
       >
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={`${activeCar.id}-${angleIndex}`}
-            src={carImages[angleIndex] || carImages[0]}
-            alt={`${activeCar.title} sudut ${angleIndex + 1}`}
-            initial={{ opacity: 0, scale: 1.04 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.98 }}
-            transition={{ duration: 0.45, ease: 'easeOut' }}
-            className="w-full h-full object-cover"
-          />
-        </AnimatePresence>
+        <HeroTelemetryOverlay />
 
-        {/* Realistic Contact Shadow on Studio Floor */}
-        <div className="absolute bottom-0 inset-x-8 h-10 bg-black/25 blur-md -z-0 pointer-events-none rounded-[100%]" />
-      </div>
+        {/* Main Showcase with Ambient Floating Breathing */}
+        <div
+          className="relative w-full h-full cursor-pointer overflow-hidden"
+          onClick={() => onCarClick(activeCar.id)}
+        >
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={`${activeCar.id}-${angleIndex}`}
+              src={carImages[angleIndex] || carImages[0]}
+              alt={`${activeCar.title} sudut ${angleIndex + 1}`}
+              initial={{ opacity: 0, scale: 1.03 }}
+              animate={{ opacity: 1, scale: 1, y: [0, -3.5, 0] }}
+              exit={{ opacity: 0, scale: 0.98 }}
+              transition={{
+                opacity: { duration: 0.35, ease: 'easeOut' },
+                scale: { duration: 0.35, ease: 'easeOut' },
+                y: { duration: 4.5, repeat: Infinity, ease: 'easeInOut' },
+              }}
+              className="w-full h-full object-cover"
+            />
+          </AnimatePresence>
+        </div>
 
-      {/* Interactive Telemetry Hotspot Pins (Only on Exterior Angle 0) */}
-      {angleIndex === 0 && (
-        <>
-          <HeroHotspotPin
-            x="36%"
-            y="54%"
-            label="KAP MESIN & ECU"
-            metric="KOMPRESI 98%"
-            detail="Kompresi Mesin 98% • ECU Bebas Residu Banjir • Servis Record Auto2000"
-            icon={Activity}
-          />
-          <HeroHotspotPin
-            x="60%"
-            y="66%"
-            label="SASIS & RANGKA"
-            metric="INTEGRITAS 100%"
-            detail="Rangka Presisi 100% • Segel Pabrik Utuh • Garansi Buyback"
-            icon={ShieldCheck}
-          />
-          <HeroHotspotPin
-            x="24%"
-            y="74%"
-            label="RODA & REM"
-            metric="TAPAK 90%"
-            detail="Ketebalan Tapak Ban 90% • Sistem Rem ABS/EBD Optimal"
-            icon={Gauge}
-          />
-        </>
-      )}
+        {/* Desktop Hotspot Pins (Hidden on Mobile) */}
+        {angleIndex === 0 && (
+          <div className="hidden sm:block">
+            <HeroHotspotPin x="36%" y="54%" label="KAP MESIN & ECU" metric="KOMPRESI 98%" detail="Kompresi Mesin 98% • ECU Bebas Residu Banjir" icon={Activity} />
+            <HeroHotspotPin x="60%" y="66%" label="SASIS & RANGKA" metric="INTEGRITAS 100%" detail="Rangka Presisi 100% • Segel Pabrik Utuh" icon={ShieldCheck} />
+            <HeroHotspotPin x="24%" y="74%" label="RODA & REM" metric="TAPAK 90%" detail="Ketebalan Tapak Ban 90% • Sistem Rem ABS Optimal" icon={Gauge} />
+          </div>
+        )}
 
-      {/* Multi-Angle Studio Switcher */}
-      <div className="absolute bottom-3 left-3 right-3 z-30 flex items-center justify-between gap-2 pointer-events-none">
-        <div className="pointer-events-auto flex items-center gap-1 bg-white/90 backdrop-blur-md border border-hairline p-1 shadow-sm">
-          {STUDIO_ANGLES.map((angle) => {
-            const isActive = angleIndex === angle.id;
-            return (
+        {/* Multi-Angle Studio Switcher */}
+        <div className="absolute bottom-2.5 sm:bottom-3 left-2.5 sm:left-3 right-2.5 sm:right-3 z-30 flex items-center justify-between gap-2 pointer-events-none">
+          <div className="pointer-events-auto flex items-center gap-1 bg-white border border-hairline p-1 shadow-sm rounded-lg">
+            {STUDIO_ANGLES.map((angle) => (
               <button
                 key={angle.id}
                 type="button"
                 onClick={() => setAngleIndex(angle.id)}
-                className={`px-2.5 py-1 text-[10px] font-mono font-semibold transition-colors ${
-                  isActive ? 'bg-forest text-white' : 'text-charcoal hover:bg-alabaster'
+                className={`px-2 sm:px-2.5 py-1 text-[9px] sm:text-[10px] font-mono font-semibold rounded transition-colors active:scale-95 ${
+                  angleIndex === angle.id ? 'bg-forest text-white' : 'text-charcoal hover:bg-alabaster'
                 }`}
               >
                 {angle.label}
               </button>
-            );
-          })}
-        </div>
+            ))}
+          </div>
 
-        <div className="pointer-events-auto bg-white/90 backdrop-blur-md border border-hairline px-2.5 py-1 font-mono text-[11px] text-charcoal font-semibold shadow-sm">
-          <span className="text-forest font-bold">{angleIndex + 1}</span> / 3 Studio Views
+          <div className="pointer-events-auto bg-white border border-hairline px-2 sm:px-2.5 py-1 font-mono text-[10px] sm:text-[11px] text-charcoal font-semibold shadow-sm rounded-lg">
+            <span className="text-forest font-bold">{angleIndex + 1}</span>/3 Views
+          </div>
         </div>
       </div>
+
+      {/* Mobile-Only Horizontal Swipeable Telemetry Rail */}
+      <HeroMobileTelemetryRail />
     </div>
   );
 };

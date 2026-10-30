@@ -30,15 +30,28 @@ export const InspectionDossierModal: React.FC<InspectionDossierModalProps> = ({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 select-none">
+      <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 select-none">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} className="fixed inset-0 bg-charcoal/70" />
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.96, y: 12 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.96, y: 12 }}
-          className="relative w-full max-w-2xl bg-white border border-hairline p-6 shadow-2xl z-10 space-y-4 max-h-[90vh] overflow-y-auto"
+          initial={{ y: '100%', opacity: 0.5 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: '100%', opacity: 0 }}
+          transition={{ type: 'spring', damping: 28, stiffness: 320 }}
+          drag="y"
+          dragConstraints={{ top: 0 }}
+          dragElastic={0.2}
+          onDragEnd={(_, info) => {
+            if (info.offset.y > 100) onClose();
+          }}
+          style={{
+            paddingBottom: 'calc(1.25rem + env(safe-area-inset-bottom, 0px))',
+          }}
+          className="relative w-full max-w-2xl bg-white border-t sm:border border-hairline p-5 sm:p-6 shadow-2xl z-10 space-y-4 rounded-t-2xl sm:rounded-none max-h-[90vh] overflow-y-auto"
         >
+          {/* Drag Handle */}
+          <div className="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-1 sm:hidden" />
+
           {/* Header Berkas Audit */}
           <div className="flex items-start justify-between pb-3 border-b border-hairline gap-3">
             <div className="space-y-0.5">
@@ -46,7 +59,7 @@ export const InspectionDossierModal: React.FC<InspectionDossierModalProps> = ({
               <h3 className="font-heading text-lg font-bold text-charcoal">{stage.title}</h3>
               <p className="font-mono text-xs text-muted">Auditor: <strong className="text-charcoal">{stage.inspectorName}</strong></p>
             </div>
-            <button type="button" onClick={onClose} className="p-1 border border-hairline bg-alabaster hover:bg-forest hover:text-white" aria-label="Tutup berkas">
+            <button type="button" onClick={onClose} className="p-1.5 border border-hairline bg-alabaster rounded-full text-charcoal active:scale-90" aria-label="Tutup berkas">
               <X className="h-4 w-4" />
             </button>
           </div>
@@ -70,7 +83,7 @@ export const InspectionDossierModal: React.FC<InspectionDossierModalProps> = ({
 
             <div className="p-3 bg-alabaster border border-hairline space-y-1.5">
               <div className="flex justify-between text-xs font-mono">
-                <span className="text-muted font-bold flex items-center gap-1"><Cpu className="h-3.5 w-3.5 text-forest" /> OBD-II & KETEBALAN CAT</span>
+                <span className="text-muted font-bold flex items-center gap-1"><Cpu className="h-3.5 w-3.5 text-forest" /> OBD-II & CAT</span>
                 <span className="text-forest font-bold">DTC CLEAN</span>
               </div>
               <div className="space-y-1 font-mono text-[10px]">
@@ -93,18 +106,18 @@ export const InspectionDossierModal: React.FC<InspectionDossierModalProps> = ({
           </div>
 
           {/* Stempel Pegas Taktil */}
-          <motion.div initial={{ scale: 1.3, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring', stiffness: 450, damping: 25 }} className="p-2.5 bg-sage-light border-2 border-forest flex items-center justify-between">
+          <div className="p-2.5 bg-sage-light border-2 border-forest flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Award className="h-5 w-5 text-forest shrink-0" />
               <div><span className="font-mono text-[9px] uppercase text-forest font-bold block">CAP AKREDITASI RESMI</span><p className="font-heading font-bold text-xs text-forest uppercase">TERVERIFIKASI & MEMENUHI STANDAR MUTU 100%</p></div>
             </div>
             <span className="font-mono text-[10px] text-forest font-bold bg-white px-2 py-0.5 border border-forest">PASSED</span>
-          </motion.div>
+          </div>
 
           {/* Aksi */}
           <div className="flex justify-end gap-2 pt-2 border-t border-hairline font-mono text-xs">
-            <button type="button" onClick={onClose} className="px-3.5 py-1.5 bg-canvas border border-hairline hover:border-forest text-charcoal">Tutup</button>
-            <button type="button" onClick={handleWhatsAppConsult} className="px-3.5 py-1.5 bg-forest text-white hover:bg-forest-light border border-forest font-bold flex items-center gap-1.5 shadow-sm">
+            <button type="button" onClick={onClose} className="px-3.5 py-2 bg-canvas border border-hairline hover:border-forest text-charcoal active:scale-95">Tutup</button>
+            <button type="button" onClick={handleWhatsAppConsult} className="px-3.5 py-2 bg-forest text-white hover:bg-forest-light border border-forest font-bold flex items-center gap-1.5 shadow-sm active:scale-95">
               <PhoneCall className="h-3.5 w-3.5" /><span>Tanya via WhatsApp</span>
             </button>
           </div>

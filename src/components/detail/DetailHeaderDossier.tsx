@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, ShieldCheck, Wrench, UserCheck, CheckCircle2, ChevronRight } from 'lucide-react';
+import { ArrowLeft, ShieldCheck, Wrench, UserCheck, CheckCircle2 } from 'lucide-react';
 import { CarUnit } from '../../types/showroom';
 import { useShowroomStore } from '../../store/useShowroomStore';
 
@@ -16,35 +16,26 @@ export const DetailHeaderDossier: React.FC<DetailHeaderDossierProps> = ({ car })
     : `${car.status.toUpperCase()} • ${car.plateNumber || 'PLAT F BOGOR'}`;
 
   return (
-    <div className="space-y-4 select-none">
-      {/* Modern Breadcrumb & Minimalist Strip */}
+    <header className="space-y-4 select-none">
+      {/* Minimalist Breadcrumb & Status Pill Strip */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <button
           type="button"
           onClick={() => setActiveTab('inventory')}
-          className="inline-flex items-center gap-2 px-3 py-1.5 bg-canvas border border-hairline hover:border-forest text-xs font-mono font-semibold text-charcoal hover:text-forest transition-colors shadow-sm"
+          className="inline-flex items-center gap-2 px-3 py-1.5 bg-canvas border border-hairline hover:border-forest text-xs font-mono font-semibold text-charcoal hover:text-forest transition-colors shadow-sm active:scale-95"
         >
           <ArrowLeft className="h-3.5 w-3.5 text-forest" />
           <span>Kembali ke Katalog</span>
         </button>
 
-        <div className="flex items-center gap-2">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-sage-light text-forest border border-sage-border font-mono text-[11px] font-bold">
-            <span className="h-2 w-2 rounded-full bg-forest animate-pulse" />
-            <span>{statusLabel}</span>
-          </span>
-          <div className="hidden sm:flex items-center gap-1 text-xs font-mono text-muted">
-            <span className="hover:text-forest cursor-pointer" onClick={() => setActiveTab('inventory')}>
-              Katalog
-            </span>
-            <ChevronRight className="h-3 w-3" />
-            <span className="text-charcoal font-semibold truncate max-w-xs">{car.title}</span>
-          </div>
-        </div>
+        <span className="inline-flex items-center gap-2 px-3 py-1 bg-sage-light text-forest border border-sage-border font-mono text-[11px] font-bold">
+          <span className="h-2 w-2 rounded-full bg-forest animate-pulse" />
+          <span>{statusLabel}</span>
+        </span>
       </div>
 
-      {/* Headline Dossier Unit */}
-      <div className="border border-hairline bg-canvas p-6 sm:p-7 space-y-4 shadow-sm">
+      {/* Identity Anchor Card */}
+      <div className="border border-hairline bg-canvas p-5 sm:p-7 space-y-4 shadow-sm">
         <div className="space-y-2">
           <div className="flex flex-wrap items-center gap-2 font-mono text-xs">
             <span className="bg-forest text-white px-2.5 py-0.5 font-bold uppercase tracking-wider">
@@ -67,7 +58,7 @@ export const DetailHeaderDossier: React.FC<DetailHeaderDossierProps> = ({ car })
           </h1>
         </div>
 
-        {/* Micro-Badges: Kepemilikan & Servis */}
+        {/* Micro-Badges: Ownership, Service & Flood Clearance */}
         <div className="flex flex-wrap gap-2 pt-3 border-t border-hairline text-xs font-body">
           <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-alabaster border border-hairline text-charcoal">
             <UserCheck className="h-3.5 w-3.5 text-forest shrink-0" />
@@ -83,6 +74,6 @@ export const DetailHeaderDossier: React.FC<DetailHeaderDossierProps> = ({ car })
           </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 };

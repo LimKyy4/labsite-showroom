@@ -19,30 +19,30 @@ export const RouteGuideTabs: React.FC = () => {
   };
 
   return (
-    <section aria-label="Panduan Rute Jalan Menuju Showroom" className="bg-canvas border-b border-hairline py-16 sm:py-20">
+    <section aria-label="Panduan Rute Jalan Menuju Showroom" className="bg-canvas border-b border-hairline py-16 sm:py-20 select-none">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div className="max-w-2xl space-y-2">
             <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-alabaster border border-hairline text-forest font-mono text-xs font-bold uppercase tracking-wider">
               <Map className="h-3.5 w-3.5" />
-              <span>ZONA 03 • DYNAMIC GPS WAYPOINT & ELEVATION TRACK</span>
+              <span>ZONA 03 • DYNAMIC GPS WAYPOINT & TRACK</span>
             </div>
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-charcoal">
+            <h2 className="font-heading text-[clamp(1.5rem,3.5vw,2.5rem)] font-bold tracking-tight text-charcoal">
               NAVIGASI TOL JAGORAWI KE SHOWROOM.
             </h2>
-            <p className="font-body text-sm text-muted">
+            <p className="font-body text-xs sm:text-sm text-muted">
               Pilih waypoint di bawah untuk meninjau patokan fisik, panduan lajur bebas hambatan, serta profil elevasi jalan.
             </p>
           </div>
-          <div className="font-mono text-xs text-forest bg-sage-light px-3 py-1.5 border border-sage-border font-bold shrink-0 flex items-center gap-2">
+          <div className="font-mono text-xs text-forest bg-sage-light px-3 py-1.5 border border-sage-border font-bold shrink-0 flex items-center gap-2 self-start md:self-auto">
             <Navigation className="h-3.5 w-3.5" />
-            <span>PROGRESS JALUR: {current.progressPercent}%</span>
+            <span>PROGRESS: {current.progressPercent}%</span>
           </div>
         </div>
 
-        {/* Dynamic Horizontal Track Filling Deep Forest Green */}
-        <div className="relative w-full h-2 bg-hairline overflow-hidden">
+        {/* Dynamic Track Line */}
+        <div className="relative w-full h-1.5 bg-hairline overflow-hidden">
           <motion.div
             className="absolute left-0 top-0 bottom-0 bg-forest"
             initial={{ width: '12%' }}
@@ -51,8 +51,8 @@ export const RouteGuideTabs: React.FC = () => {
           />
         </div>
 
-        {/* 4 Interactive Waypoint Controllers with Crisp High Contrast */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Horizontal Scroll Rail on Mobile/Tablet / 4-Col Grid on Desktop */}
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-2 no-scrollbar lg:grid lg:grid-cols-4 lg:gap-4">
           {ROUTE_STEPS.map((st, idx) => {
             const Icon = st.icon;
             const isActive = activeStep === idx;
@@ -61,7 +61,7 @@ export const RouteGuideTabs: React.FC = () => {
                 key={st.num}
                 type="button"
                 onClick={() => setActiveStep(idx)}
-                className={`relative text-left p-4 border transition-all duration-150 flex flex-col justify-between min-h-[110px] select-none ${
+                className={`shrink-0 w-[78vw] sm:w-[280px] lg:w-auto snap-center relative text-left p-3.5 sm:p-4 border transition-all duration-150 flex flex-col justify-between min-h-[110px] active:scale-98 ${
                   isActive
                     ? 'border-forest bg-forest text-white shadow-md'
                     : 'border-hairline bg-canvas hover:border-muted text-charcoal hover:bg-alabaster'
@@ -99,8 +99,8 @@ export const RouteGuideTabs: React.FC = () => {
                     {st.title}
                   </h3>
                   <p
-                    className={`font-body text-[11px] truncate leading-normal ${
-                      isActive ? 'text-white/80' : 'text-muted'
+                    className={`font-body text-[11px] leading-normal ${
+                      isActive ? 'text-white/90' : 'text-muted'
                     }`}
                   >
                     {st.landmark}

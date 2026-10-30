@@ -21,7 +21,7 @@ export const BentoBlueprintCard: React.FC<BentoBlueprintCardProps> = ({
   items,
   className = '',
 }) => {
-  const { ref, style, onMouseMove, onMouseLeave } = useTiltEffect({ maxTilt: 8, scale: 1.01 });
+  const { ref, style, sheenPos, onMouseMove, onMouseLeave } = useTiltEffect({ maxTilt: 7, scale: 1.015 });
   const [activeTab, setActiveTab] = useState(0);
 
   const microTabs = ['Blok Mesin', 'Girboks Matic', 'ECU & Wiring', 'Radiator'];
@@ -32,17 +32,18 @@ export const BentoBlueprintCard: React.FC<BentoBlueprintCardProps> = ({
       style={style}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className={`relative bg-canvas border border-hairline p-6 hover:border-forest transition-colors duration-200 overflow-hidden flex flex-col justify-between group select-none ${className}`}
+      className={`relative bg-canvas border border-hairline p-5 sm:p-6 hover:border-sage transition-all duration-300 overflow-hidden flex flex-col justify-between group select-none ${className}`}
     >
-      {/* Specular Sheen Reflection Layer (Solid flat overlay per zero-gradient policy) */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300 bg-white/20 border border-forest/20" />
-
-      {/* Laser Scanline Sweeper for Transmission */}
-      {blueprintType === 'transmission' && (
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="w-full h-0.5 bg-forest/40 shadow-[0_0_8px_#183B2B] animate-[bounce_4s_infinite]" />
-        </div>
-      )}
+      {/* Dynamic Specular Sheen Tracker (Solid flat overlay per zero-gradient policy) */}
+      <div
+        style={{
+          left: `${sheenPos.x}%`,
+          top: `${sheenPos.y}%`,
+          opacity: sheenPos.opacity * 0.15,
+          transform: 'translate(-50%, -50%)',
+        }}
+        className="absolute w-48 h-48 bg-white rounded-full pointer-events-none transition-opacity duration-200 blur-xl z-20"
+      />
 
       {/* Blueprint Visuals */}
       {blueprintType === 'transmission' && (
@@ -96,7 +97,7 @@ export const BentoBlueprintCard: React.FC<BentoBlueprintCardProps> = ({
       {blueprintType === 'transmission' && (
         <div className="mt-4 pt-3 border-t border-hairline relative z-10 space-y-2">
           <span className="text-[10px] font-mono uppercase text-muted tracking-wider block font-bold">
-            Komponen Utama yang Terlindungi Polis:
+            Komponen Terlindungi Polis:
           </span>
           <div className="flex flex-wrap gap-1.5">
             {microTabs.map((tab, idx) => (

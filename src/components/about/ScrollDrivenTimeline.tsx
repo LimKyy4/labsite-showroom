@@ -40,12 +40,12 @@ export const ScrollDrivenTimeline: React.FC = () => {
 
   return (
     <section aria-label="Alur Standarisasi Inspeksi" className="bg-canvas border-b border-hairline py-16 sm:py-24 select-none">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
         <div className="max-w-3xl space-y-2">
           <span className="font-mono text-xs uppercase tracking-wider text-forest font-bold block">
             AUDITED QUALITY GATE PIPELINE • SCROLL-DRIVEN ARCHITECTURE
           </span>
-          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-charcoal tracking-tight">
+          <h2 className="font-heading text-[clamp(1.5rem,3.5vw,2.5rem)] font-bold text-charcoal tracking-tight">
             4 GERBANG MUTU VERIFIKASI SEBELUM KENDARAAN DISERAHTERIMAKAN.
           </h2>
           <p className="font-body text-xs sm:text-sm text-muted leading-relaxed">
@@ -53,10 +53,11 @@ export const ScrollDrivenTimeline: React.FC = () => {
           </p>
         </div>
 
-        <div ref={containerRef} className="relative ml-4 sm:ml-6 md:ml-8 pl-6 sm:pl-8 space-y-10">
-          <div className="absolute left-[-2px] top-4 bottom-8 w-0.5 bg-hairline" />
+        <div ref={containerRef} className="relative ml-6 sm:ml-8 md:ml-0 pl-6 sm:pl-8 md:pl-0 space-y-8 sm:space-y-12">
+          {/* Track Line: Left on Mobile, Centered on Desktop */}
+          <div className="absolute left-[-2px] md:left-1/2 md:-translate-x-1/2 top-4 bottom-8 w-0.5 bg-hairline" />
           <div
-            className="absolute left-[-2px] top-4 w-0.5 bg-forest transition-all duration-150 ease-out"
+            className="absolute left-[-2px] md:left-1/2 md:-translate-x-1/2 top-4 w-0.5 bg-forest transition-all duration-150 ease-out"
             style={{ height: `${pathProgress}%` }}
           />
 
@@ -64,6 +65,7 @@ export const ScrollDrivenTimeline: React.FC = () => {
             <TimelineMilestoneCard
               key={stage.num}
               stage={stage}
+              index={idx}
               isSelected={activeNode === idx}
               isCompleted={idx < activeNode}
               onSelect={() => setActiveNode(idx)}

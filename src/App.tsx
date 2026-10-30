@@ -32,19 +32,28 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-canvas text-charcoal font-body antialiased pb-16 md:pb-0">
+    <div
+      style={{ position: 'relative' }}
+      className="min-h-screen flex flex-col bg-canvas text-charcoal font-body antialiased pb-28 sm:pb-36 md:pb-0 relative"
+    >
       {/* Floating Pill Fixed Top App Bar */}
       <NavbarPill />
 
-      {/* Main Content Area with Viewport Offset Padding */}
-      <main className="flex-1 pt-20 sm:pt-24">
+      {/* Main Content Area with Viewport Offset & Non-Static Positioning */}
+      <main
+        style={{
+          position: 'relative',
+          paddingTop: 'calc(4.75rem + env(safe-area-inset-top, 0px))',
+        }}
+        className="relative flex-1"
+      >
         {renderActivePage()}
       </main>
 
       {/* Editorial Footer */}
       <Footer />
 
-      {/* Mobile Floating Action Dock (Thumb Zone) */}
+      {/* Smart Mobile Action Dock (Auto-Hide on Scroll Down / Collapsible) */}
       <MobileBottomDock />
 
       {/* Global Modals, Floating Toasts & Dev Utility Dock */}

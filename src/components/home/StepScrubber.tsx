@@ -64,27 +64,27 @@ export const StepScrubber: React.FC = () => {
   const [activeStepIndex, setActiveStepIndex] = useState(0);
 
   return (
-    <section className="py-16 sm:py-20 bg-canvas border-b border-hairline">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+    <section className="py-16 sm:py-20 bg-canvas border-b border-hairline select-none">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
         <div className="space-y-2 border-b border-hairline pb-6">
           <span className="text-[11px] font-mono tracking-widest text-forest uppercase font-bold">
             ALUR PEMBELIAN BEBAS CEMAS
           </span>
-          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-charcoal tracking-tight">
+          <h2 className="font-heading text-[clamp(1.5rem,3.5vw,2.5rem)] font-bold text-charcoal tracking-tight">
             4 LANGKAH MEMILIKI MOBIL SEKEN PRIMA.
           </h2>
         </div>
 
-        {/* Animated Progress Line */}
-        <div className="relative w-full h-1 bg-hairline overflow-hidden -mb-4">
+        {/* Progress Line */}
+        <div className="relative w-full h-1 bg-hairline overflow-hidden -mb-3 sm:-mb-4">
           <div
             className="h-full bg-forest transition-all duration-300 ease-out"
             style={{ width: `${((activeStepIndex + 1) / SCRUBBER_DATA.length) * 100}%` }}
           />
         </div>
 
-        {/* 4 Capsule Scrubber Steps */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {/* Touch-Snap Horizontal Carousel (Mobile) / 4-Col Grid (Desktop) */}
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-2 no-scrollbar md:grid md:grid-cols-4 md:gap-3">
           {SCRUBBER_DATA.map((item, idx) => {
             const isActive = activeStepIndex === idx;
             return (
@@ -92,7 +92,7 @@ export const StepScrubber: React.FC = () => {
                 key={item.step}
                 type="button"
                 onClick={() => setActiveStepIndex(idx)}
-                className={`p-4 text-left border transition-all duration-150 flex flex-col justify-between min-h-[90px] ${
+                className={`shrink-0 w-[78vw] sm:w-[260px] md:w-auto snap-center p-3.5 sm:p-4 text-left border transition-all duration-150 flex flex-col justify-between min-h-[92px] active:scale-98 ${
                   isActive
                     ? 'bg-forest text-white border-forest shadow-md'
                     : 'bg-alabaster text-charcoal border-hairline hover:border-forest'

@@ -44,57 +44,84 @@ export const NavbarPill: React.FC = () => {
     <>
       <header
         aria-label="Floating Dynamic Island Navbar"
-        className={`fixed top-3 sm:top-5 inset-x-0 z-40 flex justify-center pointer-events-none transition-all duration-300 ease-out ${
-          isVisible ? 'translate-y-0 opacity-100' : '-translate-y-[120%] opacity-0'
+        style={{ top: 'calc(0.75rem + env(safe-area-inset-top, 0px))' }}
+        className={`fixed inset-x-0 z-40 flex justify-center pointer-events-none transition-all duration-300 ease-out ${
+          isVisible ? 'translate-y-0 opacity-100' : '-translate-y-[130%] opacity-0'
         }`}
       >
-        <div className="pointer-events-auto w-[94%] max-w-5xl rounded-full bg-white/85 backdrop-blur-xl border border-gray-200/80 px-3 py-1.5 sm:px-4 sm:py-2 shadow-lg flex items-center justify-between gap-3 select-none">
-          <button type="button" onClick={() => handleTabClick('home')} className="flex items-center gap-2.5 text-left focus:outline-none shrink-0 group pl-1">
-            <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center bg-forest text-white rounded-full group-hover:scale-105 transition-transform">
+        <div className="pointer-events-auto w-[94%] max-w-5xl rounded-full bg-white border border-hairline px-3 py-1.5 sm:px-4 sm:py-2 shadow-lg flex items-center justify-between gap-2.5 sm:gap-3 select-none">
+          {/* Brand Logo Anchor */}
+          <button
+            type="button"
+            onClick={() => handleTabClick('home')}
+            className="flex items-center gap-2 sm:gap-2.5 text-left focus:outline-none shrink-0 group pl-0.5"
+          >
+            <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center bg-forest text-white rounded-full group-hover:scale-105 active:scale-95 transition-transform shadow-sm">
               <CarFront className="h-4 w-4" />
             </div>
             <div className="flex flex-col">
-              <span className="font-heading text-xs sm:text-sm font-bold tracking-tight text-charcoal leading-none">SHOWROOM<span className="text-forest">.BOGOR</span></span>
-              <span className="text-[9px] tracking-wider font-mono text-muted uppercase mt-0.5">by labsite.id</span>
+              <span className="font-heading text-xs sm:text-sm font-bold tracking-tight text-charcoal leading-none">
+                SHOWROOM<span className="text-forest">.BOGOR</span>
+              </span>
+              <span className="text-[9px] tracking-wider font-mono text-muted uppercase mt-0.5">
+                by labsite.id
+              </span>
             </div>
           </button>
 
-          <nav className="hidden md:flex items-center gap-1 p-1 bg-alabaster/80 rounded-full border border-hairline/70">
+          {/* Desktop Navigation Links */}
+          <nav className="hidden md:flex items-center gap-1 p-1 bg-alabaster rounded-full border border-hairline">
             {navLinks.map((link) => (
               <button
                 key={link.id}
                 type="button"
                 onClick={() => handleTabClick(link.id)}
-                className={`relative px-3.5 py-1.5 text-xs font-mono font-semibold rounded-full transition-colors duration-150 whitespace-nowrap z-10 ${
+                className={`relative px-3.5 py-1.5 text-xs font-mono font-semibold rounded-full transition-colors duration-150 whitespace-nowrap z-10 active:scale-95 ${
                   activeTab === link.id ? 'text-white' : 'text-charcoal hover:text-forest'
                 }`}
               >
                 {activeTab === link.id && (
-                  <motion.span layoutId="activePill" transition={{ type: 'spring', stiffness: 450, damping: 35 }} className="absolute inset-0 bg-forest rounded-full -z-10 shadow-sm" />
+                  <motion.span
+                    layoutId="activePill"
+                    transition={{ type: 'spring', stiffness: 450, damping: 35 }}
+                    className="absolute inset-0 bg-forest rounded-full -z-10 shadow-sm"
+                  />
                 )}
                 {link.label}
               </button>
             ))}
           </nav>
 
-          <div className="flex items-center gap-2 shrink-0 pr-1">
-            <div className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 bg-alabaster/90 border border-hairline rounded-full text-forest font-mono text-[10px] font-semibold">
+          {/* Right Action Island & Mobile Triggers */}
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 pr-0.5">
+            {/* Mobile Compact Status Chip */}
+            <div className="flex sm:hidden items-center gap-1 px-2 py-1 bg-sage-light border border-sage-border rounded-full text-forest font-mono text-[9px] font-bold">
+              <span className="h-1.5 w-1.5 rounded-full bg-forest animate-pulse" />
+              <span>Buka</span>
+            </div>
+
+            {/* Desktop Hours Beacon */}
+            <div className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 bg-alabaster border border-hairline rounded-full text-forest font-mono text-[10px] font-semibold">
               <Radio className="h-2.5 w-2.5 animate-pulse text-forest" />
               <span>Buka • 08-18 WIB</span>
             </div>
+
+            {/* Sales WhatsApp CTA */}
             <button
               type="button"
               onClick={openWhatsApp}
-              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-mono font-bold bg-forest text-white hover:bg-forest-light border border-forest rounded-full transition-all duration-200 hover:scale-105 active:scale-95 shadow-sm"
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-mono font-bold bg-forest text-white hover:bg-forest-light border border-forest rounded-full transition-all hover:scale-102 active:scale-95 shadow-sm"
             >
               <PhoneCall className="h-3 w-3" />
               <span>Hubungi Sales</span>
             </button>
+
+            {/* Mobile Hamburger Drawer Trigger */}
             <button
               type="button"
               onClick={() => setMobileMenuOpen(true)}
-              className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center border border-hairline bg-alabaster rounded-full text-charcoal md:hidden"
-              aria-label="Buka navigasi"
+              className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center border border-hairline bg-alabaster rounded-full text-charcoal md:hidden active:scale-90 transition-transform"
+              aria-label="Buka navigasi menu"
             >
               <Menu className="h-4 w-4" />
             </button>

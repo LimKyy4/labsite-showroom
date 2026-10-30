@@ -30,7 +30,7 @@ export const DevCacheResetButton: React.FC = () => {
   return (
     <aside
       aria-label="Utilitas Reset Data Showroom"
-      className="fixed bottom-20 right-4 sm:bottom-6 sm:right-6 z-40 flex items-center select-none"
+      className="hidden md:flex fixed bottom-6 left-6 z-40 items-center select-none"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -40,7 +40,7 @@ export const DevCacheResetButton: React.FC = () => {
         disabled={isResetting}
         layout
         transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-        className="flex items-center gap-2 h-9 px-2.5 bg-forest text-white border border-sage-border rounded-full shadow-lg hover:bg-forest-light focus:outline-none transition-colors"
+        className="flex items-center gap-2 h-9 px-3 bg-forest text-white border border-sage-border rounded-full shadow-lg hover:bg-forest-light focus:outline-none transition-colors active:scale-95"
         title="Bersihkan Cache & Pulihkan Mock Data"
       >
         <div className="relative flex items-center justify-center shrink-0">
@@ -70,7 +70,7 @@ export const DevCacheResetButton: React.FC = () => {
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 4 }}
-            className="absolute right-0 bottom-full mb-2 px-2.5 py-1 bg-charcoal text-white text-[10px] font-mono border border-hairline shadow-xl whitespace-nowrap pointer-events-none flex items-center gap-1.5"
+            className="absolute left-0 bottom-full mb-2 px-2.5 py-1 bg-charcoal text-white text-[10px] font-mono border border-hairline shadow-xl whitespace-nowrap pointer-events-none flex items-center gap-1.5"
           >
             <Database className="h-3 w-3 text-sage-light" />
             <span>Reset LocalStorage & Reload Data</span>

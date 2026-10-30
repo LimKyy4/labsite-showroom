@@ -19,7 +19,7 @@ export const PillarMatrixCard: React.FC<PillarMatrixCardProps> = ({
   scope,
   icon: Icon,
 }) => {
-  const { ref, style, onMouseMove, onMouseLeave } = useTiltEffect({ maxTilt: 6, scale: 1.01 });
+  const { ref, style, sheenPos, onMouseMove, onMouseLeave } = useTiltEffect({ maxTilt: 6, scale: 1.01 });
 
   return (
     <article
@@ -27,10 +27,18 @@ export const PillarMatrixCard: React.FC<PillarMatrixCardProps> = ({
       style={style}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="group relative border border-hairline bg-canvas p-6 flex flex-col justify-between hover:border-forest transition-all duration-300 shadow-sm select-none"
+      className="group relative border border-hairline bg-canvas p-6 flex flex-col justify-between hover:border-forest transition-all duration-300 shadow-sm select-none overflow-hidden"
     >
-      {/* Specular Sheen Reflection Layer (Solid flat overlay per zero-gradient policy) */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300 bg-white/15 border border-forest/20 z-10" />
+      {/* Specular Sheen Tracker (Solid flat overlay per zero-gradient policy) */}
+      <div
+        style={{
+          left: `${sheenPos.x}%`,
+          top: `${sheenPos.y}%`,
+          opacity: sheenPos.opacity * 0.12,
+          transform: 'translate(-50%, -50%)',
+        }}
+        className="absolute w-40 h-40 bg-white rounded-full pointer-events-none blur-lg z-10"
+      />
 
       <div className="space-y-4">
         <div className="flex items-center justify-between pb-3 border-b border-hairline">

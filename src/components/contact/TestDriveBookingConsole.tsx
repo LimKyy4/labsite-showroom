@@ -39,7 +39,7 @@ export const TestDriveBookingConsole: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleBooking} className="border border-hairline bg-canvas p-6 sm:p-7 space-y-5 select-none shadow-sm">
+    <form onSubmit={handleBooking} className="border border-hairline bg-canvas p-4 sm:p-7 space-y-4 sm:space-y-5 select-none shadow-sm">
       <div className="flex items-center justify-between pb-3 border-b border-hairline">
         <div className="space-y-0.5">
           <div className="font-mono text-[10px] text-forest font-bold uppercase tracking-wider">DISPATCH TERMINAL</div>
@@ -47,11 +47,11 @@ export const TestDriveBookingConsole: React.FC = () => {
         </div>
         <div className="flex items-center gap-1.5 font-mono text-[10px] text-forest bg-sage-light px-2 py-0.5 border border-sage-border font-bold">
           <ShieldCheck className="h-3 w-3" />
-          <span>GARANSI UNIT STERIL</span>
+          <span>GARANSI STERIL</span>
         </div>
       </div>
 
-      <div className="space-y-4 text-xs font-body">
+      <div className="space-y-3.5 text-xs font-body">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label className="font-mono text-[10px] uppercase tracking-wider text-muted block mb-1">
@@ -63,7 +63,7 @@ export const TestDriveBookingConsole: React.FC = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Contoh: Hendra Kusuma"
-              className="w-full p-2 border border-hairline bg-alabaster focus:outline-none focus:border-forest text-charcoal text-xs"
+              className="w-full h-11 px-3 border border-hairline bg-alabaster focus:outline-none focus:border-forest text-charcoal text-xs rounded-lg"
             />
           </div>
           <div>
@@ -76,7 +76,7 @@ export const TestDriveBookingConsole: React.FC = () => {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="0812xxxxxxxx"
-              className="w-full p-2 border border-hairline bg-alabaster focus:outline-none focus:border-forest text-charcoal font-mono text-xs"
+              className="w-full h-11 px-3 border border-hairline bg-alabaster focus:outline-none focus:border-forest text-charcoal font-mono text-xs rounded-lg"
             />
           </div>
         </div>
@@ -88,7 +88,7 @@ export const TestDriveBookingConsole: React.FC = () => {
           <select
             value={selectedCarId}
             onChange={(e) => setSelectedCarId(e.target.value)}
-            className="w-full p-2 border border-hairline bg-alabaster focus:outline-none focus:border-forest text-charcoal text-xs font-mono font-medium"
+            className="w-full h-11 px-3 border border-hairline bg-alabaster focus:outline-none focus:border-forest text-charcoal text-xs font-mono font-medium rounded-lg"
           >
             {cars.map((c) => (
               <option key={c.id} value={c.id}>
@@ -108,7 +108,7 @@ export const TestDriveBookingConsole: React.FC = () => {
             value={date}
             min={new Date().toISOString().split('T')[0]}
             onChange={(e) => setDate(e.target.value)}
-            className="w-full p-2 border border-hairline bg-alabaster focus:outline-none focus:border-forest text-charcoal font-mono text-xs"
+            className="w-full h-11 px-3 border border-hairline bg-alabaster focus:outline-none focus:border-forest text-charcoal font-mono text-xs rounded-lg"
           />
         </div>
 
@@ -119,14 +119,14 @@ export const TestDriveBookingConsole: React.FC = () => {
         <button
           type="submit"
           disabled={!isFormValid}
-          className={`w-full py-3 px-4 font-mono text-xs font-bold border transition-colors flex items-center justify-center gap-2 ${
+          className={`w-full min-h-[48px] py-3 px-4 font-mono text-xs font-bold border rounded-lg transition-all flex items-center justify-center gap-2 active:scale-98 ${
             isFormValid
               ? 'bg-forest text-white hover:bg-forest-light border-forest shadow-sm'
               : 'bg-alabaster text-muted border-hairline cursor-not-allowed'
           }`}
         >
           {isFormValid ? <CheckCircle2 className="h-4 w-4 text-emerald-400" /> : <AlertCircle className="h-4 w-4" />}
-          <span>{isFormValid ? 'Konfirmasi Tiket VIP Test Drive (WhatsApp)' : 'Lengkapi Nama & No. WhatsApp Valid'}</span>
+          <span>{isFormValid ? 'Konfirmasi Tiket VIP Test Drive (WhatsApp)' : 'Lengkapi Nama & No. WhatsApp'}</span>
           <Send className="h-3.5 w-3.5 ml-1" />
         </button>
       </div>
