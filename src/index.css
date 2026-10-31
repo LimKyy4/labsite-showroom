@@ -5,6 +5,11 @@
 @tailwind utilities;
 
 @layer base {
+  html, body, #root {
+    position: relative;
+    min-height: 100%;
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;

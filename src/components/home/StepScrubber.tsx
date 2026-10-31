@@ -83,8 +83,8 @@ export const StepScrubber: React.FC = () => {
           />
         </div>
 
-        {/* Touch-Snap Horizontal Carousel (Mobile) / 4-Col Grid (Desktop) */}
-        <div className="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-2 no-scrollbar md:grid md:grid-cols-4 md:gap-3">
+        {/* Touch-Snap Horizontal Carousel (Mobile) / 4-Col Grid (Desktop) with Anti-Off-Center Formula */}
+        <div className="flex overflow-x-auto snap-x snap-mandatory px-[calc(50%-140px)] md:px-0 gap-3 pb-2 no-scrollbar md:grid md:grid-cols-4 md:gap-3">
           {SCRUBBER_DATA.map((item, idx) => {
             const isActive = activeStepIndex === idx;
             return (
@@ -92,7 +92,7 @@ export const StepScrubber: React.FC = () => {
                 key={item.step}
                 type="button"
                 onClick={() => setActiveStepIndex(idx)}
-                className={`shrink-0 w-[78vw] sm:w-[260px] md:w-auto snap-center p-3.5 sm:p-4 text-left border transition-all duration-150 flex flex-col justify-between min-h-[92px] active:scale-98 ${
+                className={`shrink-0 w-[280px] md:w-auto snap-center p-3.5 sm:p-4 text-left border transition-all duration-150 flex flex-col justify-between min-h-[92px] active:scale-98 ${
                   isActive
                     ? 'bg-forest text-white border-forest shadow-md'
                     : 'bg-alabaster text-charcoal border-hairline hover:border-forest'

@@ -5,6 +5,7 @@ import { HeroTelemetryOverlay } from './HeroTelemetryOverlay';
 import { HeroHotspotPin } from './HeroHotspotPin';
 import { HeroMobileTelemetryRail } from './HeroMobileTelemetryRail';
 import { CarUnit } from '../../types/showroom';
+import { useTiltEffect } from '../../hooks/useTiltEffect';
 
 interface HeroCarCarouselProps {
   cars: CarUnit[];
@@ -14,9 +15,9 @@ interface HeroCarCarouselProps {
 }
 
 const STUDIO_ANGLES = [
-  { id: 0, label: '01 Depan 3/4' },
-  { id: 1, label: '02 Interior' },
-  { id: 2, label: '03 Mesin' },
+  { id: 0, label: '01 Tampak Depan' },
+  { id: 1, label: '02 Kokpit Interior' },
+  { id: 2, label: '03 Ruang Mesin' },
 ];
 
 export const HeroCarCarousel: React.FC<HeroCarCarouselProps> = ({
@@ -26,6 +27,7 @@ export const HeroCarCarousel: React.FC<HeroCarCarouselProps> = ({
 }) => {
   const [angleIndex, setAngleIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const { ref: tiltRef, style: tiltStyle, sheenPos, onMouseMove, onMouseLeave } = useTiltEffect({ maxTilt: 5, scale: 1.01 });
   const activeCar = cars[currentIndex] || cars[0];
 
   const carImages = activeCar.images && activeCar.images.length >= 3
@@ -47,15 +49,39 @@ export const HeroCarCarousel: React.FC<HeroCarCarouselProps> = ({
   return (
     <div className="space-y-2 select-none">
       <div
-        className="relative w-full aspect-[16/9] border border-hairline bg-alabaster overflow-hidden group shadow-sm"
+        ref={tiltRef}
+        style={tiltStyle}
+        onMouseMove={onMouseMove}
+        onMouseLeave={onMouseLeave}
         onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
+        className="relative w-full aspect-[16/9] border border-hairline bg-alabaster overflow-hidden group shadow-sm"
       >
+        {/* Isometric Studio Grid Floor (1px Hairline Without Gradients) */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-40 stroke-hairline" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="isometricGrid" width="48" height="48" patternUnits="userSpaceOnUse">
+              <path d="M 48 0 L 0 48 M 0 0 L 48 48" fill="none" strokeWidth="0.75" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#isometricGrid)" />
+        </svg>
+
+        {/* Specular Sheen Reflection Layer */}
+        <div
+          style={{
+            left: `${sheenPos.x}%`,
+            top: `${sheenPos.y}%`,
+            opacity: sheenPos.opacity * 0.025,
+            transform: 'translate(-50%, -50%)',
+          }}
+          className="absolute w-80 h-80 bg-white rounded-full pointer-events-none blur-2xl z-20 transition-opacity duration-150"
+        />
+
         <HeroTelemetryOverlay />
 
-        {/* Main Showcase with Ambient Floating Breathing */}
+        {/* Main Showcase with Ambient Floating Breathing (Anti-Off-Center Controlled Stage) */}
         <div
-          className="relative w-full h-full cursor-pointer overflow-hidden"
+          className="relative w-full h-full flex items-center justify-center cursor-pointer overflow-hidden z-10 origin-center"
           onClick={() => onCarClick(activeCar.id)}
         >
           <AnimatePresence mode="wait">
@@ -63,25 +89,28 @@ export const HeroCarCarousel: React.FC<HeroCarCarouselProps> = ({
               key={`${activeCar.id}-${angleIndex}`}
               src={carImages[angleIndex] || carImages[0]}
               alt={`${activeCar.title} sudut ${angleIndex + 1}`}
-              initial={{ opacity: 0, scale: 1.03 }}
+              initial={{ opacity: 0, scale: 0.94 }}
               animate={{ opacity: 1, scale: 1, y: [0, -3.5, 0] }}
-              exit={{ opacity: 0, scale: 0.98 }}
+              exit={{ opacity: 0, scale: 1.04 }}
               transition={{
                 opacity: { duration: 0.35, ease: 'easeOut' },
                 scale: { duration: 0.35, ease: 'easeOut' },
-                y: { duration: 4.5, repeat: Infinity, ease: 'easeInOut' },
+                y: { duration: 4.0, repeat: Infinity, ease: 'easeInOut' },
               }}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover origin-center"
             />
           </AnimatePresence>
         </div>
 
+        {/* Contact Shadow Underneath Wheels */}
+        <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 w-[72%] h-5 bg-[#19201D]/12 rounded-[100%] blur-[2px] pointer-events-none z-10" />
+
         {/* Desktop Hotspot Pins (Hidden on Mobile) */}
         {angleIndex === 0 && (
           <div className="hidden sm:block">
-            <HeroHotspotPin x="36%" y="54%" label="KAP MESIN & ECU" metric="KOMPRESI 98%" detail="Kompresi Mesin 98% • ECU Bebas Residu Banjir" icon={Activity} />
-            <HeroHotspotPin x="60%" y="66%" label="SASIS & RANGKA" metric="INTEGRITAS 100%" detail="Rangka Presisi 100% • Segel Pabrik Utuh" icon={ShieldCheck} />
-            <HeroHotspotPin x="24%" y="74%" label="RODA & REM" metric="TAPAK 90%" detail="Ketebalan Tapak Ban 90% • Sistem Rem ABS Optimal" icon={Gauge} />
+            <HeroHotspotPin x="36%" y="54%" label="KAP MESIN" metric="KOMPRESI 98%" detail="Kompresi Mesin 98% • Bebas Residu Banjir" icon={Activity} />
+            <HeroHotspotPin x="60%" y="66%" label="SASIS & RANGKA" metric="BUYBACK 100%" detail="Sasis Bebas Benturan • Garansi Buyback 100%" icon={ShieldCheck} />
+            <HeroHotspotPin x="24%" y="74%" label="KAKI-KAKI" metric="KETEBALAN 92%" detail="Ketebalan Ban 92% • Suspensi Segar" icon={Gauge} />
           </div>
         )}
 

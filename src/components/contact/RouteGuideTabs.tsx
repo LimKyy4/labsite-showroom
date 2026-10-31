@@ -51,8 +51,8 @@ export const RouteGuideTabs: React.FC = () => {
           />
         </div>
 
-        {/* Horizontal Scroll Rail on Mobile/Tablet / 4-Col Grid on Desktop */}
-        <div className="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-2 no-scrollbar lg:grid lg:grid-cols-4 lg:gap-4">
+        {/* Horizontal Scroll Rail on Mobile/Tablet / 4-Col Grid on Desktop with Anti-Off-Center Formula */}
+        <div className="flex overflow-x-auto snap-x snap-mandatory px-[calc(50%-150px)] lg:px-0 gap-3 pb-2 no-scrollbar lg:grid lg:grid-cols-4 lg:gap-4">
           {ROUTE_STEPS.map((st, idx) => {
             const Icon = st.icon;
             const isActive = activeStep === idx;
@@ -61,7 +61,7 @@ export const RouteGuideTabs: React.FC = () => {
                 key={st.num}
                 type="button"
                 onClick={() => setActiveStep(idx)}
-                className={`shrink-0 w-[78vw] sm:w-[280px] lg:w-auto snap-center relative text-left p-3.5 sm:p-4 border transition-all duration-150 flex flex-col justify-between min-h-[110px] active:scale-98 ${
+                className={`shrink-0 w-[300px] lg:w-auto snap-center relative text-left p-3.5 sm:p-4 border transition-all duration-150 flex flex-col justify-between min-h-[110px] active:scale-98 ${
                   isActive
                     ? 'border-forest bg-forest text-white shadow-md'
                     : 'border-hairline bg-canvas hover:border-muted text-charcoal hover:bg-alabaster'

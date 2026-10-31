@@ -55,10 +55,10 @@ export const FeaturedCarsSection: React.FC = () => {
           </button>
         </div>
 
-        {/* Mobile Horizontal Snap Card Rail / Desktop 3-Col Grid */}
+        {/* Mobile Horizontal Snap Card Rail (Anti-Off-Center Formula) / Desktop 3-Col Grid */}
         <div
           onScroll={handleScrollSnap}
-          className="flex overflow-x-auto snap-x snap-mandatory gap-4 md:grid md:grid-cols-3 md:gap-6 no-scrollbar pb-2"
+          className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar py-4 px-[calc(50%-160px)] md:px-0 md:py-0 md:grid md:grid-cols-3 md:gap-6"
         >
           {featuredCars.map((car, idx) => (
             <motion.div
@@ -67,7 +67,7 @@ export const FeaturedCarsSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.35, delay: idx * 0.08 }}
-              className={`shrink-0 w-[84vw] sm:w-[320px] md:w-auto snap-center bg-canvas border border-hairline hover:border-forest transition-all flex flex-col justify-between group ${car.status === 'Terjual' ? 'opacity-60' : ''}`}
+              className={`snap-center shrink-0 w-[320px] mx-3 first:ml-0 last:mr-0 md:mx-0 md:w-auto bg-canvas border border-hairline hover:border-forest transition-all flex flex-col justify-between group ${car.status === 'Terjual' ? 'opacity-60' : ''}`}
             >
               <div>
                 <div className="relative aspect-[16/9] overflow-hidden bg-hairline cursor-pointer" onClick={() => handleOpenDetail(car.id)}>

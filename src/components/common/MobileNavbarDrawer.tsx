@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { PhoneCall, X, CarFront, Radio, RotateCcw } from 'lucide-react';
+import { PhoneCall, X, Radio, RotateCcw } from 'lucide-react';
 import { ActiveTab } from '../../types/showroom';
 
 interface MobileNavbarDrawerProps {
@@ -40,9 +40,18 @@ export const MobileNavbarDrawer: React.FC<MobileNavbarDrawerProps> = ({
           >
             <div className="space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-hairline">
-                <div className="flex items-center gap-2">
-                  <CarFront className="h-4 w-4 text-forest" />
-                  <span className="font-heading text-sm font-bold text-charcoal">SHOWROOM.BOGOR</span>
+                <div className="flex items-center gap-2.5">
+                  <div className="h-8 w-8 rounded-full border border-hairline overflow-hidden bg-white flex items-center justify-center">
+                    <img
+                      src="/logo.jfif"
+                      alt="Labsite Showroom"
+                      className="h-full w-full object-contain mix-blend-multiply filter contrast-110"
+                    />
+                  </div>
+                  <div>
+                    <span className="font-heading text-sm font-bold text-charcoal block leading-none">SHOWROOM.BOGOR</span>
+                    <span className="font-mono text-[9px] text-muted uppercase">by Labsite Showroom</span>
+                  </div>
                 </div>
                 <button
                   type="button"

@@ -1,4 +1,6 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { pageContainerVariants, pageItemVariants } from '../utils/motionVariants';
 import { BrandStorySection } from '../components/about/BrandStorySection';
 import { PartnerTickerBar } from '../components/about/PartnerTickerBar';
 import { GuaranteePillarsGrid } from '../components/about/GuaranteePillarsGrid';
@@ -7,12 +9,28 @@ import { WarrantyClaimAccordion } from '../components/about/WarrantyClaimAccordi
 
 export const AboutPage: React.FC = () => {
   return (
-    <div className="space-y-0">
-      <BrandStorySection />
-      <PartnerTickerBar />
-      <GuaranteePillarsGrid />
-      <ScrollDrivenTimeline />
-      <WarrantyClaimAccordion />
-    </div>
+    <motion.div
+      variants={pageContainerVariants}
+      initial="hidden"
+      animate="visible"
+      style={{ position: 'relative' }}
+      className="relative space-y-0 pb-16"
+    >
+      <motion.div variants={pageItemVariants}>
+        <BrandStorySection />
+      </motion.div>
+      <motion.div variants={pageItemVariants}>
+        <PartnerTickerBar />
+      </motion.div>
+      <motion.div variants={pageItemVariants}>
+        <GuaranteePillarsGrid />
+      </motion.div>
+      <motion.div variants={pageItemVariants}>
+        <ScrollDrivenTimeline />
+      </motion.div>
+      <motion.div variants={pageItemVariants}>
+        <WarrantyClaimAccordion />
+      </motion.div>
+    </motion.div>
   );
 };

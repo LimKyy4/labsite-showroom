@@ -1,4 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { pageContainerVariants, pageItemVariants, heroScaleVariants } from '../utils/motionVariants';
 import { useShowroomStore } from '../store/useShowroomStore';
 import { StickyFilterToolbar } from '../components/inventory/StickyFilterToolbar';
 import { InventoryGrid } from '../components/inventory/InventoryGrid';
@@ -46,9 +48,15 @@ export const InventoryPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-alabaster min-h-screen pb-16">
+    <motion.div
+      variants={pageContainerVariants}
+      initial="hidden"
+      animate="visible"
+      style={{ position: 'relative' }}
+      className="relative bg-alabaster min-h-screen pb-16"
+    >
       {/* 1. Top Section: Header Title Banner */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-4 pb-4">
+      <motion.div variants={pageItemVariants} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-4 pb-4">
         <div className="border border-hairline bg-canvas p-6 sm:p-7 space-y-2 shadow-sm">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex items-center gap-2">
@@ -69,34 +77,36 @@ export const InventoryPage: React.FC = () => {
             Menampilkan {filteredCars.length} dari total {cars.length} unit bergaransi mesin 1 tahun dengan hasil uji 160 titik.
           </p>
         </div>
-      </div>
+      </motion.div>
 
       {/* 2. Flush-Top Sticky Filter Shelf (Full-Width Solid Pure White Surface) */}
-      <StickyFilterToolbar
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        statusFilter={statusFilter}
-        setStatusFilter={setStatusFilter}
-        transmissionFilter={transmissionFilter}
-        setTransmissionFilter={(tr) => {
-          setLocalTransmission(tr);
-          setFilterTransmission(tr);
-        }}
-        maxBudget={maxBudget}
-        setMaxBudget={(b) => {
-          setLocalBudget(b);
-          setFilterBudget(b);
-        }}
-        onReset={handleResetFilters}
-        unitCount={filteredCars.length}
-      />
+      <motion.div variants={heroScaleVariants}>
+        <StickyFilterToolbar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          statusFilter={statusFilter}
+          setStatusFilter={setStatusFilter}
+          transmissionFilter={transmissionFilter}
+          setTransmissionFilter={(tr) => {
+            setLocalTransmission(tr);
+            setFilterTransmission(tr);
+          }}
+          maxBudget={maxBudget}
+          setMaxBudget={(b) => {
+            setLocalBudget(b);
+            setFilterBudget(b);
+          }}
+          onReset={handleResetFilters}
+          unitCount={filteredCars.length}
+        />
+      </motion.div>
 
       {/* 3. Catalog Grid */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
+      <motion.div variants={pageItemVariants} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
         <InventoryGrid cars={filteredCars} onReset={handleResetFilters} />
-      </div>
+      </motion.div>
 
       <QuickPeekModal />
-    </div>
+    </motion.div>
   );
 };

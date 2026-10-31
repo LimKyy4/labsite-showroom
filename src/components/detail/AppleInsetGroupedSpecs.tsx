@@ -15,12 +15,12 @@ interface SpecItem {
 
 const InsetCell: React.FC<SpecItem> = ({ label, value, highlight }) => (
   <div className="py-2.5 px-4 border-b border-hairline last:border-b-0 flex flex-col justify-center bg-white hover:bg-alabaster/60 transition-colors">
-    <span className="font-mono text-[10px] text-muted uppercase tracking-wider block">
+    <span className="font-mono text-[10px] text-sage uppercase tracking-wider font-bold block">
       {label}
     </span>
     <span
-      className={`text-xs sm:text-sm font-semibold pt-0.5 leading-snug break-words ${
-        highlight ? 'text-forest' : 'text-charcoal'
+      className={`text-xs sm:text-[14px] font-semibold pt-0.5 leading-snug break-words ${
+        highlight ? 'text-forest font-bold' : 'text-charcoal'
       }`}
     >
       {value}
@@ -96,19 +96,19 @@ export const AppleInsetGroupedSpecs: React.FC<AppleInsetGroupedSpecsProps> = ({ 
         </span>
       </div>
 
-      {/* Apple Inset Grouped Containers */}
-      <div className="space-y-4">
+      {/* Apple Inset Grouped Containers in Responsive Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {groups.map((group, idx) => {
           const Icon = group.icon;
           return (
-            <div key={idx} className="space-y-1.5">
+            <div key={idx} className="space-y-1.5 flex flex-col">
               <div className="flex items-center gap-1.5 px-1 text-charcoal">
                 <Icon className="h-4 w-4 text-forest" />
                 <h4 className="font-heading text-xs sm:text-sm font-bold uppercase tracking-tight">
                   {group.title}
                 </h4>
               </div>
-              <div className="rounded-xl border border-hairline overflow-hidden bg-alabaster shadow-sm">
+              <div className="rounded-xl border border-hairline overflow-hidden bg-alabaster shadow-sm flex-1">
                 {group.items.map((item, itemIdx) => (
                   <InsetCell
                     key={itemIdx}

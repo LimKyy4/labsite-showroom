@@ -27,7 +27,7 @@ export const CockpitSegmentedNav: React.FC<CockpitSegmentedNavProps> = ({
   onChangeTab,
 }) => {
   return (
-    <div className="sticky top-16 sm:top-20 z-20 bg-alabaster/95 backdrop-blur-sm py-2 select-none">
+    <div className="sticky top-16 sm:top-20 z-20 bg-alabaster py-2 mb-6 sm:mb-8 select-none border-b border-hairline/60">
       <nav
         aria-label="Navigasi Kokpit Mobil"
         className="flex items-center gap-1.5 p-1 bg-white border border-hairline overflow-x-auto no-scrollbar shadow-sm"

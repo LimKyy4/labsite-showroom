@@ -42,20 +42,20 @@ export const FoldOnePricingStrip: React.FC<FoldOnePricingStripProps> = ({ car })
         <button
           type="button"
           onClick={handleDownloadReport}
-          className="flex-1 py-2.5 px-3 bg-canvas border border-hairline hover:bg-forest hover:text-white hover:border-forest text-charcoal font-mono text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors shadow-sm active:scale-95"
+          className="flex-1 min-h-[42px] py-2.5 px-3 bg-canvas border border-hairline hover:bg-forest hover:text-white hover:border-forest text-charcoal font-mono text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors shadow-sm active:scale-95 whitespace-nowrap"
         >
-          <Download className="h-3.5 w-3.5" />
-          <span className="truncate">Unduh Lembar 160 Titik</span>
+          <Download className="h-3.5 w-3.5 shrink-0" />
+          <span className="whitespace-nowrap">Unduh Laporan 160 Titik</span>
         </button>
 
         <button
           type="button"
           onClick={handleShare}
-          className="py-2.5 px-3 bg-canvas border border-hairline hover:bg-forest hover:text-white hover:border-forest text-charcoal font-mono text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors shadow-sm active:scale-95 shrink-0"
+          className="min-h-[42px] py-2.5 px-3.5 bg-canvas border border-hairline hover:bg-forest hover:text-white hover:border-forest text-charcoal font-mono text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors shadow-sm active:scale-95 shrink-0 whitespace-nowrap"
           title="Bagikan Unit"
         >
-          <Share2 className="h-3.5 w-3.5" />
-          <span>Bagikan</span>
+          <Share2 className="h-3.5 w-3.5 shrink-0" />
+          <span className="whitespace-nowrap">Bagikan</span>
         </button>
       </div>
     </div>

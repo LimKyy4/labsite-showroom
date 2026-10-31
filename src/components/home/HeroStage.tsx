@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, CheckCircle2, ShieldCheck, MapPin } from 'lucide-react';
 import { HeroCarCarousel } from './HeroCarCarousel';
-import { FloatingQuickSearch } from './FloatingQuickSearch';
+import { FloatingQuickSearchDock } from './FloatingQuickSearchDock';
 import { RollingCounter } from '../common/RollingCounter';
 import { useShowroomStore } from '../../store/useShowroomStore';
 
@@ -17,7 +17,7 @@ export const HeroStage: React.FC = () => {
   });
 
   const stageScale = useTransform(scrollYProgress, [0, 1], [1, 0.96]);
-  const stageY = useTransform(scrollYProgress, [0, 1], [0, 36]);
+  const stageY = useTransform(scrollYProgress, [0, 1], [0, 40]);
 
   const heroCars = cars.filter((c) => c.isFeatured).slice(0, 3);
   const activeCar = heroCars[slideIndex] || cars[0];
@@ -124,7 +124,7 @@ export const HeroStage: React.FC = () => {
 
         {/* Floating Quick Search Dock */}
         <div className="mt-8 lg:mt-12">
-          <FloatingQuickSearch />
+          <FloatingQuickSearchDock />
         </div>
       </motion.div>
     </section>

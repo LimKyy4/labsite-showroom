@@ -30,7 +30,7 @@ export const DevCacheResetButton: React.FC = () => {
   return (
     <aside
       aria-label="Utilitas Reset Data Showroom"
-      className="hidden md:flex fixed bottom-6 left-6 z-40 items-center select-none"
+      className="hidden md:flex fixed bottom-5 left-5 z-40 items-center select-none"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -38,9 +38,10 @@ export const DevCacheResetButton: React.FC = () => {
         type="button"
         onClick={handleHardReset}
         disabled={isResetting}
-        layout
-        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-        className="flex items-center gap-2 h-9 px-3 bg-forest text-white border border-sage-border rounded-full shadow-lg hover:bg-forest-light focus:outline-none transition-colors active:scale-95"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+        className="flex items-center gap-2 h-9 px-3.5 bg-[#183B2B] text-white border border-[#4D7260] rounded-full shadow-lg hover:bg-forest-light focus:outline-none transition-colors"
         title="Bersihkan Cache & Pulihkan Mock Data"
       >
         <div className="relative flex items-center justify-center shrink-0">
@@ -48,19 +49,9 @@ export const DevCacheResetButton: React.FC = () => {
           <span className="absolute -top-1 -right-1 h-1.5 w-1.5 rounded-full bg-emerald-400" />
         </div>
 
-        <AnimatePresence>
-          {isHovered && (
-            <motion.span
-              initial={{ opacity: 0, width: 0 }}
-              animate={{ opacity: 1, width: 'auto' }}
-              exit={{ opacity: 0, width: 0 }}
-              transition={{ duration: 0.2 }}
-              className="font-mono text-[11px] font-semibold text-white whitespace-nowrap overflow-hidden pr-1"
-            >
-              Reset Cache Data
-            </motion.span>
-          )}
-        </AnimatePresence>
+        <span className="font-mono text-[11px] font-semibold text-white whitespace-nowrap">
+          Reset Cache Data
+        </span>
       </motion.button>
 
       {/* Floating Micro Tooltip */}
@@ -70,10 +61,10 @@ export const DevCacheResetButton: React.FC = () => {
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 4 }}
-            className="absolute left-0 bottom-full mb-2 px-2.5 py-1 bg-charcoal text-white text-[10px] font-mono border border-hairline shadow-xl whitespace-nowrap pointer-events-none flex items-center gap-1.5"
+            className="absolute left-0 bottom-full mb-2 px-2.5 py-1 bg-charcoal text-white text-[10px] font-mono border border-hairline shadow-xl whitespace-nowrap pointer-events-none flex items-center gap-1.5 rounded"
           >
             <Database className="h-3 w-3 text-sage-light" />
-            <span>Reset LocalStorage & Reload Data</span>
+            <span>Reset LocalStorage & Muat Ulang</span>
           </motion.div>
         )}
       </AnimatePresence>

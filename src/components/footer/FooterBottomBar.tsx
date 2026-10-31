@@ -26,7 +26,7 @@ export const FooterBottomBar: React.FC = () => {
       <div className="flex items-center justify-center md:justify-start gap-2">
         <ShieldCheck className="h-4 w-4 text-forest shrink-0" />
         <p className="font-body text-[11px] sm:text-xs text-charcoal">
-          &copy; 2026 <span className="font-bold text-forest">SHOWROOM.BOGOR</span> by labsite.id. Seluruh hak cipta dilindungi.
+          &copy; 2026 <span className="font-bold text-forest">SHOWROOM.BOGOR</span> by Labsite Showroom. Seluruh hak cipta dilindungi.
         </p>
       </div>
 

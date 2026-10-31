@@ -65,11 +65,11 @@ export const StickyPricingSidebar: React.FC<StickyPricingSidebarProps> = ({ car 
             <button
               type="button"
               onClick={handleDownloadReport}
-              className="flex-1 min-w-0 h-10 px-3 inline-flex items-center justify-center gap-2 text-xs font-mono font-semibold text-charcoal bg-canvas border border-hairline hover:bg-forest hover:text-white hover:border-forest transition-colors shadow-sm"
+              className="flex-1 h-10 px-3 inline-flex items-center justify-center gap-2 text-xs font-mono font-semibold text-charcoal bg-canvas border border-hairline hover:bg-forest hover:text-white hover:border-forest transition-colors shadow-sm whitespace-nowrap"
               title="Unduh laporan inspeksi lengkap 160 titik"
             >
-              <Download className="h-4 w-4" />
-              <span className="truncate">Unduh Lembar 160 Titik</span>
+              <Download className="h-4 w-4 shrink-0" />
+              <span className="whitespace-nowrap">Unduh Laporan 160 Titik</span>
             </button>
             <button
               type="button"
@@ -77,7 +77,7 @@ export const StickyPricingSidebar: React.FC<StickyPricingSidebarProps> = ({ car 
               className="h-10 w-10 flex items-center justify-center bg-canvas border border-hairline hover:bg-forest hover:text-white text-charcoal transition-colors shrink-0 shadow-sm"
               title="Bagikan unit ini"
             >
-              <Share2 className="h-4 w-4" />
+              <Share2 className="h-4 w-4 shrink-0" />
             </button>
           </div>
         </div>

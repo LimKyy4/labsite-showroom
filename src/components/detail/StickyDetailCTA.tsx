@@ -53,11 +53,11 @@ export const StickyDetailCTA: React.FC<StickyDetailCTAProps> = ({ car }) => {
           <button
             type="button"
             onClick={handleDownloadReport}
-            className="flex-1 min-w-0 h-11 px-3 sm:px-4 inline-flex items-center justify-center gap-2 text-xs font-mono font-semibold text-charcoal bg-white border border-hairline hover:bg-alabaster hover:border-forest hover:text-forest transition-colors"
+            className="flex-1 h-11 px-3 sm:px-4 inline-flex items-center justify-center gap-2 text-xs font-mono font-semibold text-charcoal bg-white border border-hairline hover:bg-alabaster hover:border-forest hover:text-forest transition-colors whitespace-nowrap"
             title="Unduh laporan inspeksi lengkap 160 titik"
           >
             <Download className="h-4 w-4 text-forest shrink-0" />
-            <span className="truncate">Unduh Laporan 160 Titik</span>
+            <span className="whitespace-nowrap">Unduh Laporan 160 Titik</span>
           </button>
           <button
             type="button"

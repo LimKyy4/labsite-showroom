@@ -28,13 +28,13 @@ export const HeroMobileTelemetryRail: React.FC = () => {
       <span className="font-mono text-[9px] uppercase tracking-wider text-muted font-bold block">
         Telemetri Inspeksi Unit (Geser Kartu):
       </span>
-      <div className="flex overflow-x-auto snap-x snap-mandatory gap-2 no-scrollbar pb-1">
+      <div className="flex overflow-x-auto snap-x snap-mandatory px-[calc(50%-140px)] gap-3 no-scrollbar pb-1">
         {telemetryData.map((item, idx) => {
           const Icon = item.icon;
           return (
             <div
               key={idx}
-              className="shrink-0 w-[68vw] snap-center bg-canvas border border-hairline p-2.5 space-y-1 shadow-sm"
+              className="shrink-0 w-[280px] snap-center bg-canvas border border-hairline p-3 space-y-1.5 shadow-sm"
             >
               <div className="flex items-center justify-between">
                 <span className="font-mono text-[9px] text-muted font-semibold">{item.label}</span>

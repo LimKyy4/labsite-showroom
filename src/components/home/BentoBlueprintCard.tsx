@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { LucideIcon } from 'lucide-react';
 import { useTiltEffect } from '../../hooks/useTiltEffect';
+import { BentoBlueprintVisual } from './BentoBlueprintVisual';
 
 interface BentoBlueprintCardProps {
   badge: string;
@@ -12,6 +13,14 @@ interface BentoBlueprintCardProps {
   className?: string;
 }
 
+const MICRO_TABS = ['Blok Mesin', 'Girboks Matic', 'ECU & Wiring', 'Radiator'];
+const TAB_DETAILS = [
+  'Garansi silinder blok, poros engkol, dan klep internal mesin.',
+  'Perlindungan planetary gear, solenoid matic, dan valve body.',
+  'Jaminan bebas korsleting dan modul ECU 100% orisinil pabrik.',
+  'Pencegahan overheating dengan radiator core dan waterpump segar.',
+];
+
 export const BentoBlueprintCard: React.FC<BentoBlueprintCardProps> = ({
   badge,
   title,
@@ -21,10 +30,8 @@ export const BentoBlueprintCard: React.FC<BentoBlueprintCardProps> = ({
   items,
   className = '',
 }) => {
-  const { ref, style, sheenPos, onMouseMove, onMouseLeave } = useTiltEffect({ maxTilt: 7, scale: 1.015 });
+  const { ref, style, sheenPos, onMouseMove, onMouseLeave } = useTiltEffect({ maxTilt: 9, scale: 1.015 });
   const [activeTab, setActiveTab] = useState(0);
-
-  const microTabs = ['Blok Mesin', 'Girboks Matic', 'ECU & Wiring', 'Radiator'];
 
   return (
     <div
@@ -34,7 +41,7 @@ export const BentoBlueprintCard: React.FC<BentoBlueprintCardProps> = ({
       onMouseLeave={onMouseLeave}
       className={`relative bg-canvas border border-hairline p-5 sm:p-6 hover:border-sage transition-all duration-300 overflow-hidden flex flex-col justify-between group select-none ${className}`}
     >
-      {/* Dynamic Specular Sheen Tracker (Solid flat overlay per zero-gradient policy) */}
+      {/* Specular Sheen Tracker (Solid overlay with blur, per zero-gradient directive) */}
       <div
         style={{
           left: `${sheenPos.x}%`,
@@ -45,34 +52,9 @@ export const BentoBlueprintCard: React.FC<BentoBlueprintCardProps> = ({
         className="absolute w-48 h-48 bg-white rounded-full pointer-events-none transition-opacity duration-200 blur-xl z-20"
       />
 
-      {/* Blueprint Visuals */}
-      {blueprintType === 'transmission' && (
-        <svg className="absolute -right-6 -bottom-6 w-48 h-48 opacity-[0.08] pointer-events-none stroke-forest fill-none" viewBox="0 0 200 200" strokeWidth="1.2">
-          <circle cx="100" cy="100" r="70" strokeDasharray="4 2" />
-          <circle cx="100" cy="100" r="45" />
-          <path d="M100 20 V180 M20 100 H180" />
-          <circle cx="100" cy="100" r="15" />
-        </svg>
-      )}
+      <BentoBlueprintVisual blueprintType={blueprintType} />
 
-      {blueprintType === 'flood_sensor' && (
-        <div className="absolute right-4 bottom-4 p-2 bg-alabaster border border-hairline text-right font-mono text-[10px] text-muted space-y-0.5 pointer-events-none">
-          <span className="text-forest font-bold block">SENSOR PROBE: 0.0 CM</span>
-          <span>Sungai Cisadane: Aman</span>
-          <span>Bendung Katulampa: Bebas</span>
-        </div>
-      )}
-
-      {blueprintType === 'samsat_stamp' && (
-        <div className="absolute right-4 top-4 border-2 border-forest/30 bg-alabaster/60 px-3 py-1 rotate-6 pointer-events-none shadow-sm">
-          <span className="text-[10px] font-mono font-bold tracking-widest text-forest uppercase block">
-            TERVALIDASI SAMSAT KOTA BOGOR
-          </span>
-          <span className="text-[8px] font-mono text-muted text-center block">LEGALITAS FISIK SAH</span>
-        </div>
-      )}
-
-      {/* Card Content */}
+      {/* Card Header & Content */}
       <div className="space-y-4 relative z-10">
         <div className="flex items-center justify-between">
           <span className="text-[10px] font-mono tracking-wider px-2.5 py-1 bg-sage-light text-forest border border-sage-border font-bold uppercase rounded-full">
@@ -100,7 +82,7 @@ export const BentoBlueprintCard: React.FC<BentoBlueprintCardProps> = ({
             Komponen Terlindungi Polis:
           </span>
           <div className="flex flex-wrap gap-1.5">
-            {microTabs.map((tab, idx) => (
+            {MICRO_TABS.map((tab, idx) => (
               <button
                 key={idx}
                 type="button"
@@ -115,6 +97,9 @@ export const BentoBlueprintCard: React.FC<BentoBlueprintCardProps> = ({
               </button>
             ))}
           </div>
+          <p className="text-[11px] font-mono text-forest bg-sage-light px-2.5 py-1.5 border border-sage-border rounded-lg">
+            {TAB_DETAILS[activeTab]}
+          </p>
         </div>
       )}
 

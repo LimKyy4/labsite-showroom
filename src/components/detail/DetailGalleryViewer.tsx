@@ -52,24 +52,27 @@ export const DetailGalleryViewer: React.FC<DetailGalleryViewerProps> = ({
 
   return (
     <div className="space-y-3 select-none">
-      {/* 16:9 Adaptive Viewport */}
+      {/* 16:9 Adaptive Viewport (Anti-Off-Center Center Stage) */}
       <div
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        className="relative aspect-[16/9] w-full overflow-hidden bg-alabaster border border-hairline group touch-pan-y shadow-sm"
+        className="relative aspect-[16/9] w-full flex items-center justify-center overflow-hidden bg-alabaster border border-hairline group touch-pan-y shadow-sm origin-center"
       >
         <AnimatePresence mode="wait">
           <motion.img
             key={currentIndex}
             src={safeImages[currentIndex] || safeImages[0]}
             alt={`${title} - ${viewLabels[currentIndex] || 'Foto Unit'}`}
-            initial={{ opacity: 0.8 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0.8 }}
-            transition={{ duration: 0.2 }}
-            className="h-full w-full object-cover"
+            initial={{ opacity: 0, scale: 0.94 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.04 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className="h-full w-full object-cover origin-center"
           />
         </AnimatePresence>
+
+        {/* Contact Shadow Underneath Wheels */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[72%] h-4 bg-[#19201D]/12 rounded-[100%] blur-[2px] pointer-events-none z-10" />
 
         <div className="absolute top-3 left-3 z-10"><CarStatusBadge status={status} size="sm" /></div>
         <div className="absolute top-3 right-3 z-10 flex items-center gap-1.5">

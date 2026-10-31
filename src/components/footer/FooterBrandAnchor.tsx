@@ -1,5 +1,5 @@
 import React from 'react';
-import { CarFront, Radio, CalendarClock, ArrowUpRight } from 'lucide-react';
+import { Radio, CalendarClock, ArrowUpRight } from 'lucide-react';
 import { useShowroomStore } from '../../store/useShowroomStore';
 
 export const FooterBrandAnchor: React.FC = () => {
@@ -8,20 +8,24 @@ export const FooterBrandAnchor: React.FC = () => {
   return (
     <div className="space-y-5">
       <div className="flex items-center gap-3">
-        <div className="flex h-11 w-11 items-center justify-center bg-forest text-white rounded-lg shadow-sm">
-          <CarFront className="h-5 w-5" />
+        <div className="relative flex h-11 w-11 items-center justify-center bg-white border border-hairline rounded-lg overflow-hidden shadow-sm shrink-0">
+          <img
+            src="/logo.jfif"
+            alt="Labsite Showroom"
+            className="h-full w-full object-contain mix-blend-multiply filter contrast-110 brightness-100"
+          />
         </div>
         <div>
           <span className="font-heading text-xl font-bold tracking-tight text-charcoal block leading-none">
             SHOWROOM<span className="text-forest">.BOGOR</span>
           </span>
           <span className="text-[10px] tracking-wider font-mono text-muted uppercase mt-0.5 block">
-            by labsite.id
+            by Labsite Showroom
           </span>
         </div>
       </div>
 
-      {/* Live Telemetry Badge */}
+      {/* Live Telemetry Badge with Green Pulse Beacon */}
       <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-sage-light border border-sage-border text-forest font-mono text-xs font-semibold">
         <Radio className="h-3 w-3 animate-pulse text-forest" />
         <span>SHOWROOM AKTIF BOGOR</span>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CarFront, Phone, MessageCircle, ChevronUp } from 'lucide-react';
+import { CarFront, Phone, MessageCircle, ChevronUp, ChevronDown } from 'lucide-react';
 import { useShowroomStore } from '../../store/useShowroomStore';
 import { useScrollDirection } from '../../hooks/useScrollDirection';
 
@@ -15,7 +15,7 @@ export const MobileBottomDock: React.FC = () => {
   const isVisible = !isCollapsed && (isAtTop || scrollDirection === 'up');
 
   const openWhatsApp = () => {
-    const text = encodeURIComponent('Halo admin labsite showroom Bogor, saya ingin bertanya unit mobil ready.');
+    const text = encodeURIComponent('Halo admin Labsite Showroom Bogor, saya ingin bertanya unit mobil ready.');
     window.open(`https://wa.me/6281234567890?text=${text}`, '_blank');
   };
 
@@ -45,7 +45,7 @@ export const MobileBottomDock: React.FC = () => {
         aria-label="Bilah Aksi Cepat Jempol"
         initial={false}
         animate={{
-          y: isVisible ? '0%' : '140%',
+          y: isVisible ? '0%' : '120%',
           opacity: isVisible ? 1 : 0,
         }}
         transition={{ type: 'spring', stiffness: 360, damping: 28 }}
@@ -56,10 +56,11 @@ export const MobileBottomDock: React.FC = () => {
         <button
           type="button"
           onClick={() => setIsCollapsed(true)}
-          className="w-full flex items-center justify-center py-1 group focus:outline-none"
+          className="w-full flex items-center justify-center gap-1 py-1 group focus:outline-none"
           title="Ciutkan Bilah Aksi"
         >
-          <div className="w-9 h-1 bg-white/40 rounded-full group-hover:bg-white transition-colors" />
+          <div className="w-8 h-1 bg-white/40 rounded-full group-hover:bg-white transition-colors" />
+          <ChevronDown className="h-3 w-3 text-white/50 group-hover:text-white transition-colors" />
           <span className="sr-only">Ciutkan bilah aksi</span>
         </button>
 

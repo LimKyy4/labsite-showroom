@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useShowroomStore } from './store/useShowroomStore';
 import { NavbarPill } from './components/common/NavbarPill';
 import { Footer } from './components/common/Footer';
@@ -39,15 +40,27 @@ export const App: React.FC = () => {
       {/* Floating Pill Fixed Top App Bar */}
       <NavbarPill />
 
-      {/* Main Content Area with Viewport Offset & Non-Static Positioning */}
+      {/* Main Content Area with Viewport Offset & Zero-Flicker AnimatePresence */}
       <main
         style={{
           position: 'relative',
-          paddingTop: 'calc(4.75rem + env(safe-area-inset-top, 0px))',
+          paddingTop: 'calc(5.5rem + env(safe-area-inset-top, 0px))',
         }}
         className="relative flex-1"
       >
-        {renderActivePage()}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full relative"
+            style={{ position: 'relative' }}
+          >
+            {renderActivePage()}
+          </motion.div>
+        </AnimatePresence>
       </main>
 
       {/* Editorial Footer */}
